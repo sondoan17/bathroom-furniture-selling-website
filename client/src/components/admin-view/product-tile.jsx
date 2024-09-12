@@ -26,10 +26,12 @@ function AdminProductTile({
                 product?.salePrice > 0 ? "line-through" : ""
               } text-lg font-semibold text-primary`}
             >
-              ${product?.price}
+              {product?.price} VND
             </span>
             {product?.salePrice > 0 ? (
-              <span className="text-lg font-bold">${product?.salePrice}</span>
+              <span className="text-lg font-bold">
+                {product?.salePrice} VND
+              </span>
             ) : null}
           </div>
         </CardContent>
@@ -41,9 +43,9 @@ function AdminProductTile({
               setFormData(product);
             }}
           >
-            Edit
+            Sửa
           </Button>
-          <Button onClick={() => handleDelete(product?._id)}>Delete</Button>
+          <Button onClick={() => handleDelete(product?._id)}>Xóa</Button>
         </CardFooter>
       </div>
     </Card>

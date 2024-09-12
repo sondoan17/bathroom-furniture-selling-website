@@ -135,8 +135,9 @@ function HeaderRightContent(isAuthenticated) {
           </DropdownMenu>
         </div>
       ) : (
-        <div>
-          <Button onClick={() => navigate("/auth/login")}>Login</Button>
+        <div className="flex gap-4">
+          <Button onClick={() => navigate("/auth/login")}>Đăng nhập</Button>
+          <Button onClick={() => navigate("/auth/register")}>Đăng ký</Button>
         </div>
       )}
     </>
@@ -151,7 +152,7 @@ function ShoppingHeader() {
       <div className="flex h-16 items-center justify-between px-4 md:px-6">
         <Link to="/shop/home" className="flex items-center gap-2">
           <HousePlug className="h-6 w-6" />
-          <span className="font-bold">Ecommerce</span>
+          <span className="font-bold">Shop Bảo Minh</span>
         </Link>
         <Sheet>
           <SheetTrigger asChild>

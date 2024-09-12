@@ -16,23 +16,23 @@ function ShoppingOrderDetailsView({ orderDetails }) {
             <Label>{orderDetails?._id}</Label>
           </div>
           <div className="flex mt-2 items-center justify-between">
-            <p className="font-medium">Order Date</p>
+            <p className="font-medium">Ngày đặt hàng</p>
             <Label>{orderDetails?.orderDate.split("T")[0]}</Label>
           </div>
           <div className="flex mt-2 items-center justify-between">
-            <p className="font-medium">Order Price</p>
-            <Label>${orderDetails?.totalAmount}</Label>
+            <p className="font-medium">Giá đơn hàng</p>
+            <Label>{orderDetails?.totalAmount} VND</Label>
           </div>
           <div className="flex mt-2 items-center justify-between">
-            <p className="font-medium">Payment method</p>
+            <p className="font-medium">Phương thức thanh toán</p>
             <Label>{orderDetails?.paymentMethod}</Label>
           </div>
           <div className="flex mt-2 items-center justify-between">
-            <p className="font-medium">Payment Status</p>
+            <p className="font-medium">Trạng thái thanh toán</p>
             <Label>{orderDetails?.paymentStatus}</Label>
           </div>
           <div className="flex mt-2 items-center justify-between">
-            <p className="font-medium">Order Status</p>
+            <p className="font-medium">Trạng thái đơn hàng</p>
             <Label>
               <Badge
                 className={`py-1 px-3 ${
@@ -51,7 +51,7 @@ function ShoppingOrderDetailsView({ orderDetails }) {
         <Separator />
         <div className="grid gap-4">
           <div className="grid gap-2">
-            <div className="font-medium">Order Details</div>
+            <div className="font-medium">Chi tiết đơn hàng</div>
             <ul className="grid gap-3">
               {orderDetails?.cartItems && orderDetails?.cartItems.length > 0
                 ? orderDetails?.cartItems.map((item) => (
@@ -67,7 +67,7 @@ function ShoppingOrderDetailsView({ orderDetails }) {
         </div>
         <div className="grid gap-4">
           <div className="grid gap-2">
-            <div className="font-medium">Shipping Info</div>
+            <div className="font-medium">Thông tin giao hàng</div>
             <div className="grid gap-0.5 text-muted-foreground">
               <span>{user.userName}</span>
               <span>{orderDetails?.addressInfo?.address}</span>

@@ -37,21 +37,21 @@ function AuthLogin() {
     <div className="mx-auto w-full max-w-md space-y-6">
       <div className="text-center">
         <h1 className="text-3xl font-bold tracking-tight text-foreground">
-          Sign in to your account
+          Đăng nhập
         </h1>
         <p className="mt-2">
-          Don't have an account
+          Chưa có tài khoản?
           <Link
             className="font-medium ml-2 text-primary hover:underline"
             to="/auth/register"
           >
-            Register
+            Đăng ký ngay
           </Link>
         </p>
       </div>
       <CommonForm
         formControls={loginFormControls}
-        buttonText={"Sign In"}
+        buttonText={"Đăng nhập"}
         formData={formData}
         setFormData={setFormData}
         onSubmit={onSubmit}

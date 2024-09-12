@@ -35,27 +35,25 @@ function AuthRegister() {
     });
   }
 
- 
-
   return (
     <div className="mx-auto w-full max-w-md space-y-6">
       <div className="text-center">
         <h1 className="text-3xl font-bold tracking-tight text-foreground">
-          Create new account
+          Tạo tài khoản mới
         </h1>
         <p className="mt-2">
-          Already have an account
+          Đã có tài khoản?
           <Link
             className="font-medium ml-2 text-primary hover:underline"
             to="/auth/login"
           >
-            Login
+            Đăng nhập
           </Link>
         </p>
       </div>
       <CommonForm
         formControls={registerFormControls}
-        buttonText={"Sign Up"}
+        buttonText={"Đăng ký"}
         formData={formData}
         setFormData={setFormData}
         onSubmit={onSubmit}

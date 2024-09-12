@@ -41,18 +41,18 @@ function AdminOrdersView() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>All Orders</CardTitle>
+        <CardTitle>Tất cả đơn hàng</CardTitle>
       </CardHeader>
       <CardContent>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Order ID</TableHead>
-              <TableHead>Order Date</TableHead>
-              <TableHead>Order Status</TableHead>
-              <TableHead>Order Price</TableHead>
+              <TableHead>ID đơn hàng</TableHead>
+              <TableHead>Ngày đặt hàng</TableHead>
+              <TableHead>Trạng thái đơn hàng</TableHead>
+              <TableHead>Giá đơn hàng</TableHead>
               <TableHead>
-                <span className="sr-only">Details</span>
+                <span className="sr-only">Chi tiết</span>
               </TableHead>
             </TableRow>
           </TableHeader>
@@ -75,7 +75,7 @@ function AdminOrdersView() {
                         {orderItem?.orderStatus}
                       </Badge>
                     </TableCell>
-                    <TableCell>${orderItem?.totalAmount}</TableCell>
+                    <TableCell>{orderItem?.totalAmount} VND</TableCell>
                     <TableCell>
                       <Dialog
                         open={openDetailsDialog}
@@ -89,7 +89,7 @@ function AdminOrdersView() {
                             handleFetchOrderDetails(orderItem?._id)
                           }
                         >
-                          View Details
+                          Xem chi tiết
                         </Button>
                         <AdminOrderDetailsView orderDetails={orderDetails} />
                       </Dialog>
