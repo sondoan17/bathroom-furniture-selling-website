@@ -54,8 +54,6 @@ function AdminProducts() {
             formData,
           })
         ).then((data) => {
-         
-
           if (data?.payload?.success) {
             dispatch(fetchAllProducts());
             setFormData(initialFormData);
@@ -75,7 +73,7 @@ function AdminProducts() {
             setImageFile(null);
             setFormData(initialFormData);
             toast({
-              title: "Product add successfully",
+              title: "Thêm sản phẩm thành công",
             });
           }
         });
@@ -100,13 +98,11 @@ function AdminProducts() {
     dispatch(fetchAllProducts());
   }, [dispatch]);
 
- 
-
   return (
     <Fragment>
       <div className="mb-5 w-full flex justify-end">
         <Button onClick={() => setOpenCreateProductsDialog(true)}>
-          Add New Product
+          Thêm sản phẩm
         </Button>
       </div>
       <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
@@ -134,7 +130,7 @@ function AdminProducts() {
         <SheetContent side="right" className="overflow-auto">
           <SheetHeader>
             <SheetTitle>
-              {currentEditedId !== null ? "Edit Product" : "Add New Product"}
+              {currentEditedId !== null ? "Sửa sản phẩm" : "Thêm sản phẩm"}
             </SheetTitle>
           </SheetHeader>
           <ProductImageUpload
@@ -151,7 +147,7 @@ function AdminProducts() {
               onSubmit={onSubmit}
               formData={formData}
               setFormData={setFormData}
-              buttonText={currentEditedId !== null ? "Edit" : "Add"}
+              buttonText={currentEditedId !== null ? "Sửa" : "Thêm"}
               formControls={addProductFormElements}
               isBtnDisabled={!isFormValid()}
             />

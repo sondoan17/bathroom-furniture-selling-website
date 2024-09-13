@@ -6,7 +6,6 @@ import { Button } from "../ui/button";
 import axios from "axios";
 import { Skeleton } from "../ui/skeleton";
 
-
 function ProductImageUpload({
   imageFile,
   setImageFile,
@@ -18,6 +17,7 @@ function ProductImageUpload({
   isCustomStyling = false,
 }) {
   const inputRef = useRef(null);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   function handleImageFileChange(event) {
     const selectedFile = event.target.files?.[0];
@@ -47,7 +47,7 @@ function ProductImageUpload({
     const data = new FormData();
     data.append("my_file", imageFile);
     const response = await axios.post(
-      "http://localhost:5000/api/admin/products/upload-image",
+      `${backendUrl}/api/admin/products/upload-image`,
       data
     );
 

@@ -6,11 +6,12 @@ const initialState = {
   searchResults: [],
 };
 
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 export const getSearchResults = createAsyncThunk(
   "/order/getSearchResults",
   async (keyword) => {
     const response = await axios.get(
-      `http://localhost:5000/api/shop/search/${keyword}`
+      `${backendUrl}/api/shop/search/${keyword}`
     );
 
     return response.data;
