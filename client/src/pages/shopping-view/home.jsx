@@ -21,22 +21,28 @@ import { addToCart, fetchCartItems } from "@/store/shop/cart-slice";
 import { useToast } from "@/components/ui/use-toast";
 import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import { getFeatureImages } from "@/store/common-slice";
+import {
+  toilet,
+  lavabo,
+  kitchensink,
+  bathroommirror,
+  shower,
+} from "@/assets/index";
 
 const categoriesWithIcon = [
   {
     id: "toilet",
     label: "Bồn cầu",
-
-    image: "/src/assets/1.png",
+    image: toilet,
   },
-  { id: "lavabo", label: "Chậu Lavabo", image: "/src/assets/2.png" },
-  { id: "kitchensink", label: "Chậu rửa bát", image: "/src/assets/3.png" },
+  { id: "lavabo", label: "Chậu Lavabo", image: lavabo },
+  { id: "kitchensink", label: "Chậu rửa bát", image: kitchensink },
   {
     id: "bathroommirror",
     label: "Gương phòng tắm",
-    image: "/src/assets/4.png",
+    image: bathroommirror,
   },
-  { id: "shower", label: "Sen tắm", image: "/src/assets/5.png" },
+  { id: "shower", label: "Sen tắm", image: shower },
 ];
 function ShoppingHome() {
   const [currentSlide, setCurrentSlide] = useState(0);
