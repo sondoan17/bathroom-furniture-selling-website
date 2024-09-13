@@ -12,6 +12,14 @@ import { Label } from "../ui/label";
 import StarRatingComponent from "../common/star-rating";
 import { useEffect, useState } from "react";
 import { addReview, getReviews } from "@/store/shop/review-slice";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 function ProductDetailsDialog({ open, setOpen, productDetails }) {
   const [reviewMsg, setReviewMsg] = useState("");
@@ -22,7 +30,13 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
   const { reviews } = useSelector((state) => state.shopReview);
 
   const { toast } = useToast();
-
+  const productImages = [
+    productDetails?.image1,
+    productDetails?.image2,
+    productDetails?.image3,
+    productDetails?.image4,
+    productDetails?.image5,
+  ];
   function handleRatingChange(getRating) {
     setRating(getRating);
   }
@@ -102,15 +116,25 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
 
   return (
     <Dialog open={open} onOpenChange={handleDialogClose}>
-      <DialogContent className="grid grid-cols-2 gap-8 sm:p-12 max-w-[90vw] sm:max-w-[80vw] lg:max-w-[70vw]">
-        <div className="relative overflow-hidden rounded-lg">
-          <img
-            src={productDetails?.image}
-            alt={productDetails?.title}
-            width={600}
-            height={600}
-            className="aspect-square w-full object-cover"
-          />
+      <DialogContent className="grid grid-cols-2 gap-10 sm:p-12 max-w-[90vw] sm:max-w-[80vw] lg:max-w-[90vw]">
+        <div className="relative  rounded-lg">
+          <Carousel plugins={[Autoplay({ delay: 5000 })]}>
+            <CarouselContent>
+              {productImages.map((image, index) => (
+                <CarouselItem key={index}>
+                  <img
+                    src={image || productDetails?.image1}
+                    alt={productDetails?.title}
+                    width={600}
+                    height={600}
+                    className="aspect-square w-full object-cover"
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         </div>
         <div className="">
           <div>

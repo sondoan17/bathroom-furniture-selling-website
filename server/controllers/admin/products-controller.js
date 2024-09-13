@@ -24,7 +24,11 @@ const handleImageUpload = async (req, res) => {
 const addProduct = async (req, res) => {
   try {
     const {
-      image,
+      image1,
+      image2,
+      image3,
+      image4,
+      image5,
       title,
       description,
       category,
@@ -38,7 +42,11 @@ const addProduct = async (req, res) => {
     
 
     const newlyCreatedProduct = new Product({
-      image,
+      image1,
+      image2,
+      image3,
+      image4,
+      image5,
       title,
       description,
       category,
@@ -86,7 +94,11 @@ const editProduct = async (req, res) => {
   try {
     const { id } = req.params;
     const {
-      image,
+      image1,
+      image2,
+      image3,
+      image4,
+      image5,
       title,
       description,
       category,
@@ -112,7 +124,11 @@ const editProduct = async (req, res) => {
     findProduct.salePrice =
       salePrice === "" ? 0 : salePrice || findProduct.salePrice;
     findProduct.totalStock = totalStock || findProduct.totalStock;
-    findProduct.image = image || findProduct.image;
+    findProduct.image1 = image1 || findProduct.image1;
+    findProduct.image2 = image2 || findProduct.image2;
+    findProduct.image3 = image3 || findProduct.image3;
+    findProduct.image4 = image4 || findProduct.image4;
+    findProduct.image5 = image5 || findProduct.image5;
     findProduct.averageReview = averageReview || findProduct.averageReview;
 
     await findProduct.save();
