@@ -3,5 +3,19 @@ import lavabo from "./lavabo.png";
 import kitchensink from "./kitchensink.png";
 import bathroommirror from "./bathroommirror.png";
 import shower from "./shower.png";
+import facebook from "./facebook.png";
+import zalo from "./zalo.png";
+import phone from "./phone.png";
+import showroom from "./showroom4.png";
 
-export { toilet, lavabo, kitchensink, bathroommirror, shower };
+export {
+  toilet,
+  lavabo,
+  kitchensink,
+  bathroommirror,
+  shower,
+  facebook,
+  zalo,
+  phone,
+  showroom,
+};
