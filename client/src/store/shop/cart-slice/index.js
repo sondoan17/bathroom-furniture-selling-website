@@ -29,7 +29,6 @@ export const fetchCartItems = createAsyncThunk(
     const response = await axios.get(
       `${backendUrl}/api/shop/cart/get/${userId}`
     );
-
     return response.data;
   }
 );

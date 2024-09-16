@@ -7,6 +7,7 @@ import { useToast } from "../ui/use-toast";
 function UserCartItemsContent({ cartItem }) {
   const { user } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.shopCart);
+  console.log(cartItems);
   const { productList } = useSelector((state) => state.shopProducts);
   const dispatch = useDispatch();
   const { toast } = useToast();
@@ -53,7 +54,7 @@ function UserCartItemsContent({ cartItem }) {
     ).then((data) => {
       if (data?.payload?.success) {
         toast({
-          title: "Cart item is updated successfully",
+          title: "Cập nhật sản phẩm thành công",
         });
       }
     });
@@ -65,7 +66,7 @@ function UserCartItemsContent({ cartItem }) {
     ).then((data) => {
       if (data?.payload?.success) {
         toast({
-          title: "Cart item is deleted successfully",
+          title: "Xóa sản phẩm thành công",
         });
       }
     });
