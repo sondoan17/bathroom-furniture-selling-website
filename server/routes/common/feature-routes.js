@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 
 const {
   addFeatureImage,
@@ -7,7 +8,7 @@ const {
 
 const router = express.Router();
 
-router.post("/add", addFeatureImage);
-router.get("/get", getFeatureImages);
+router.post("/add", cors(), addFeatureImage);
+router.get("/get", cors(), getFeatureImages);
 
 module.exports = router;

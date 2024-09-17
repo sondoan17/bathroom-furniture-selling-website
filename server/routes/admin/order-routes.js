@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 
 const {
   getAllOrdersOfAllUsers,
@@ -8,8 +9,8 @@ const {
 
 const router = express.Router();
 
-router.get("/get", getAllOrdersOfAllUsers);
-router.get("/details/:id", getOrderDetailsForAdmin);
-router.put("/update/:id", updateOrderStatus);
+router.get("/get", cors(), getAllOrdersOfAllUsers);
+router.get("/details/:id", cors(), getOrderDetailsForAdmin);
+router.put("/update/:id", cors(), updateOrderStatus);
 
 module.exports = router;

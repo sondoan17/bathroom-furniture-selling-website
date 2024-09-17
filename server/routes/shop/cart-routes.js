@@ -1,5 +1,5 @@
 const express = require("express");
-
+const cors = require("cors");
 const {
   addToCart,
   fetchCartItems,
@@ -9,9 +9,9 @@ const {
 
 const router = express.Router();
 
-router.post("/add", addToCart);
-router.get("/get/:userId", fetchCartItems);
-router.put("/update-cart", updateCartItemQty);
-router.delete("/:userId/:productId", deleteCartItem);
+router.post("/add", cors(), addToCart);
+router.get("/get/:userId", cors(), fetchCartItems);
+router.put("/update-cart", cors(), updateCartItemQty);
+router.delete("/:userId/:productId", cors(), deleteCartItem);
 
 module.exports = router;

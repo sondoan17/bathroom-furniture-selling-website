@@ -1,5 +1,5 @@
 const express = require("express");
-
+const cors = require("cors");
 const {
   addProductReview,
   getProductReviews,
@@ -7,7 +7,7 @@ const {
 
 const router = express.Router();
 
-router.post("/add", addProductReview);
-router.get("/:productId", getProductReviews);
+router.post("/add", cors(), addProductReview);
+router.get("/:productId", cors(), getProductReviews);
 
 module.exports = router;

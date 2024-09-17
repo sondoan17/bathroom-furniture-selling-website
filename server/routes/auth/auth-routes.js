@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const {
   registerUser,
   loginUser,
@@ -8,10 +9,10 @@ const {
 
 const router = express.Router();
 
-router.post("/register", registerUser);
-router.post("/login", loginUser);
-router.post("/logout", logoutUser);
-router.get("/check-auth", authMiddleware, (req, res) => {
+router.post("/register", cors(), registerUser);
+router.post("/login", cors(), loginUser);
+router.post("/logout", cors(), logoutUser);
+router.get("/check-auth", cors(), authMiddleware, (req, res) => {
   const user = req.user;
   res.status(200).json({
     success: true,

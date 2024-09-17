@@ -1,5 +1,5 @@
 const express = require("express");
-
+const cors = require("cors");
 const {
   createOrder,
   getAllOrdersByUser,
@@ -9,9 +9,9 @@ const {
 
 const router = express.Router();
 
-router.post("/create", createOrder);
-router.post("/capture", capturePayment);
-router.get("/list/:userId", getAllOrdersByUser);
-router.get("/details/:id", getOrderDetails);
+router.post("/create", cors(), createOrder);
+router.post("/capture", cors(), capturePayment);
+router.get("/list/:userId", cors(), getAllOrdersByUser);
+router.get("/details/:id", cors(), getOrderDetails);
 
 module.exports = router;
