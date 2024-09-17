@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 
 const {
   getFilteredProducts,
@@ -7,7 +8,7 @@ const {
 
 const router = express.Router();
 
-router.get("/get", getFilteredProducts);
+router.get("/get", cors(), getFilteredProducts);
 router.get("/get/:id", getProductDetails);
 
 module.exports = router;
