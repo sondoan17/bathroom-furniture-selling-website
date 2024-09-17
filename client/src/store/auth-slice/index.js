@@ -7,7 +7,8 @@ const initialState = {
   user: null,
 };
 
-const backendUrl = import.meta.env.BACKEND_URL;
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 
 export const registerUser = createAsyncThunk(
   "/auth/register",
@@ -101,7 +102,7 @@ const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        console.log(action);
+        
 
         state.isLoading = false;
         state.user = action.payload.success ? action.payload.user : null;

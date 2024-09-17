@@ -7,7 +7,7 @@ import { useToast } from "../ui/use-toast";
 function UserCartItemsContent({ cartItem }) {
   const { user } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.shopCart);
-  console.log(cartItems);
+
   const { productList } = useSelector((state) => state.shopProducts);
   const dispatch = useDispatch();
   const { toast } = useToast();
