@@ -37,7 +37,7 @@ function ProductImageUpload({
   const inputRef3 = useRef(null);
   const inputRef4 = useRef(null);
   const inputRef5 = useRef(null);
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const backendUrl = import.meta.env.BACKEND_URL;
 
   function handleImageFileChange(event, setImageFile) {
     const selectedFile = event.target.files?.[0];

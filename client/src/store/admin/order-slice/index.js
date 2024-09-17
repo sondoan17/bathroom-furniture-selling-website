@@ -6,7 +6,7 @@ const initialState = {
   orderDetails: null,
 };
 
-const backendUrl = import.meta.env.VITE_BACKEND_URL;
+const backendUrl = import.meta.env.BACKEND_URL;
 export const getAllOrdersForAdmin = createAsyncThunk(
   "/order/getAllOrdersForAdmin",
   async () => {
