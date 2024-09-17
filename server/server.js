@@ -26,7 +26,7 @@ const PORT = process.env.PORT || 5000;
 app.use(
   cors({
     origin: process.env.FRONTEND_URL,
-    methods: ["GET", "POST", "DELETE", "PUT", "OPTIONS"],
+    methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",
       "Authorization",
@@ -35,7 +35,6 @@ app.use(
       "Pragma",
     ],
     credentials: true,
-    optionsSuccessStatus: 200,
   })
 );
 
