@@ -13,7 +13,7 @@ const shopOrderRouter = require("./routes/shop/order-routes");
 const shopSearchRouter = require("./routes/shop/search-routes");
 const shopReviewRouter = require("./routes/shop/review-routes");
 const commonFeatureRouter = require("./routes/common/feature-routes");
-const { env } = require("process");
+
 
 mongoose
   .connect(process.env.MONGODB_URI)
