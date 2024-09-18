@@ -19,6 +19,9 @@ export const registerUser = createAsyncThunk(
       formData,
       {
         withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }
     );
 
@@ -35,6 +38,9 @@ export const loginUser = createAsyncThunk(
       formData,
       {
         withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }
     );
 
@@ -51,6 +57,9 @@ export const logoutUser = createAsyncThunk(
       {},
       {
         withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }
     );
 
