@@ -32,13 +32,14 @@ function AdminDashboard() {
   return (
     <div>
       <ProductImageUpload
-        imageFile={imageFile}
-        setImageFile={setImageFile}
-        uploadedImageUrl={uploadedImageUrl}
-        setUploadedImageUrl={setUploadedImageUrl}
+        imageFile1={imageFile}
+        setImageFile1={setImageFile}
+        uploadedImageUrl1={uploadedImageUrl}
+        setUploadedImageUrl1={setUploadedImageUrl}
         setImageLoadingState={setImageLoadingState}
         imageLoadingState={imageLoadingState}
         isCustomStyling={true}
+        isDashboard={true}
         // isEditMode={currentEditedId !== null}
       />
       <Button onClick={handleUploadFeatureImage} className="mt-5 w-full">

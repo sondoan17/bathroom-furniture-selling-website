@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import ShoppingHeader from "./header";
 import FloatingIcon from "./floatingIcon";
+import Footer from "./footer";
 
 function ShoppingLayout() {
   return (
@@ -12,6 +13,7 @@ function ShoppingLayout() {
         <Outlet />
       </main>
       <FloatingIcon />
+      <Footer />
     </div>
   );
 }

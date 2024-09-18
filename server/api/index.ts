@@ -15,7 +15,8 @@ import shopReviewRouter from '../routes/shop/review-routes';
 import commonFeatureRouter from '../routes/common/feature-routes';
 import testvercelRouter from '../routes/testvercel/testvercel-routes';
 dotenv.config();
-const allowedOrigin = process.env.FRONTEND_URL;
+
+
 mongoose.connect(process.env.MONGODB_URI as string)
   
 

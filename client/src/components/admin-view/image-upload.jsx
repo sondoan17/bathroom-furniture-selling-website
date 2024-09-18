@@ -31,6 +31,7 @@ function ProductImageUpload({
   setImageLoadingState,
   isEditMode,
   isCustomStyling = false,
+  isDashboard,
 }) {
   const inputRef1 = useRef(null);
   const inputRef2 = useRef(null);
@@ -77,24 +78,21 @@ function ProductImageUpload({
   }
 
   useEffect(() => {
-    if (imageFile1) uploadImageToCloudinary(imageFile1, setUploadedImageUrl1);
-  }, [imageFile1]);
+    const imageFiles = [imageFile1, imageFile2, imageFile3, imageFile4, imageFile5];
+    const setUploadedImageUrls = [
+      setUploadedImageUrl1,
+      setUploadedImageUrl2,
+      setUploadedImageUrl3,
+      setUploadedImageUrl4,
+      setUploadedImageUrl5
+    ];
 
-  useEffect(() => {
-    if (imageFile2) uploadImageToCloudinary(imageFile2, setUploadedImageUrl2);
-  }, [imageFile2]);
-
-  useEffect(() => {
-    if (imageFile3) uploadImageToCloudinary(imageFile3, setUploadedImageUrl3);
-  }, [imageFile3]);
-
-  useEffect(() => {
-    if (imageFile4) uploadImageToCloudinary(imageFile4, setUploadedImageUrl4);
-  }, [imageFile4]);
-
-  useEffect(() => {
-    if (imageFile5) uploadImageToCloudinary(imageFile5, setUploadedImageUrl5);
-  }, [imageFile5]);
+    imageFiles.forEach((file, index) => {
+      if (file) {
+        uploadImageToCloudinary(file, setUploadedImageUrls[index]);
+      }
+    });
+  }, [imageFile1, imageFile2, imageFile3, imageFile4, imageFile5]);
 
   const renderImageUploadField = (imageFile, setImageFile, uploadedImageUrl, inputRef, index) => (
     <div
@@ -147,12 +145,16 @@ function ProductImageUpload({
 
   return (
     <div className={`w-full mt-4 ${isCustomStyling ? "" : "max-w-md mx-auto"}`}>
-      <Label className="text-lg font-semibold mb-2 block">Upload Images</Label>
+      <Label className="text-lg font-semibold mb-2 block">Upload Image</Label>
       {renderImageUploadField(imageFile1, setImageFile1, uploadedImageUrl1, inputRef1, 1)}
-      {renderImageUploadField(imageFile2, setImageFile2, uploadedImageUrl2, inputRef2, 2)}
-      {renderImageUploadField(imageFile3, setImageFile3, uploadedImageUrl3, inputRef3, 3)}
-      {renderImageUploadField(imageFile4, setImageFile4, uploadedImageUrl4, inputRef4, 4)}
-      {renderImageUploadField(imageFile5, setImageFile5, uploadedImageUrl5, inputRef5, 5)}
+      {!isDashboard && (
+        <>
+          {renderImageUploadField(imageFile2, setImageFile2, uploadedImageUrl2, inputRef2, 2)}
+          {renderImageUploadField(imageFile3, setImageFile3, uploadedImageUrl3, inputRef3, 3)}
+          {renderImageUploadField(imageFile4, setImageFile4, uploadedImageUrl4, inputRef4, 4)}
+          {renderImageUploadField(imageFile5, setImageFile5, uploadedImageUrl5, inputRef5, 5)}
+        </>
+      )}
     </div>
   );
 }

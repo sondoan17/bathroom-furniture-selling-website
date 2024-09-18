@@ -177,6 +177,7 @@ function AdminProducts() {
             uploadedImageUrl3={uploadedImageUrl3}
             uploadedImageUrl4={uploadedImageUrl4}
             uploadedImageUrl5={uploadedImageUrl5}
+            isDashboard={false}
           />
           <div className="py-6">
             <CommonForm
