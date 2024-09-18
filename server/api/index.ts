@@ -13,7 +13,7 @@ import shopOrderRouter from '../routes/shop/order-routes';
 import shopSearchRouter from '../routes/shop/search-routes';
 import shopReviewRouter from '../routes/shop/review-routes';
 import commonFeatureRouter from '../routes/common/feature-routes';
-
+import testvercelRouter from '../routes/testvercel/testvercel-routes';
 dotenv.config();
 const allowedOrigin = process.env.FRONTEND_URL;
 mongoose.connect(process.env.MONGODB_URI as string)
@@ -49,6 +49,7 @@ app.use((req, res, next) => {
 
 app.use(cookieParser());
 app.use(express.json());
+app.use("/", testvercelRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/admin/products", adminProductsRouter);
 app.use("/api/admin/orders", adminOrderRouter);
