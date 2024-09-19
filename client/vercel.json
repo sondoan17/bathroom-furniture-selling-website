@@ -1,12 +1,5 @@
 {
-    "rewrites": [
-        {
-            "source": "/shop",
-            "destination": "/shop/home"
-        },
-        {
-            "source": "/shop/listing/(.*)",
-            "destination": "/shop/listing"
-        }
+    "rewrites":  [
+      {"source": "/(.*)", "destination": "/"}
     ]
-}
+  }
