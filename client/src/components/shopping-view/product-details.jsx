@@ -121,13 +121,13 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
           <Carousel plugins={[Autoplay({ delay: 5000 })]}>
             <CarouselContent>
               {productImages.map((image, index) => (
-                <CarouselItem key={index}>
+                image ? (<CarouselItem key={index}>
                   <img
-                    src={image || productDetails?.image1}
+                    src={image}
                     alt={productDetails?.title}
                     className="aspect-square w-full object-cover rounded-lg"
                   />
-                </CarouselItem>
+                </CarouselItem>) : null
               ))}
             </CarouselContent>
             <CarouselPrevious />
