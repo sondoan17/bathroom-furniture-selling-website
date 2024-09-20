@@ -60,7 +60,7 @@ const updateOrderStatus = async (req, res) => {
     if (!order) {
       return res.status(404).json({
         success: false,
-        message: "Order not found!",
+        message: "Không tìm thấy đơn hàng!",
       });
     }
 
@@ -68,13 +68,13 @@ const updateOrderStatus = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message: "Order status is updated successfully!",
+      message: "Trạng thái đơn hàng được cập nhật thành công!",
     });
   } catch (e) {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "Some error occured!",
+      message: "Có lỗi xảy ra!",
     });
   }
 };

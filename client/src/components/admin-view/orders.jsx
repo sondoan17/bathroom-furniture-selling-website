@@ -18,6 +18,7 @@ import {
   resetOrderDetails,
 } from "@/store/admin/order-slice";
 import { Badge } from "../ui/badge";
+import { formatPrice } from "@/lib/utils";
 
 function AdminOrdersView() {
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
@@ -75,7 +76,7 @@ function AdminOrdersView() {
                         {orderItem?.orderStatus}
                       </Badge>
                     </TableCell>
-                    <TableCell>{orderItem?.totalAmount} VND</TableCell>
+                    <TableCell>{formatPrice(orderItem?.totalAmount)}</TableCell>
                     <TableCell>
                       <Dialog
                         open={openDetailsDialog}

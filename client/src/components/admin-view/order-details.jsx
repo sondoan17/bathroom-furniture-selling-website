@@ -11,6 +11,7 @@ import {
   updateOrderStatus,
 } from "@/store/admin/order-slice";
 import { useToast } from "../ui/use-toast";
+import { formatPrice } from "@/lib/utils";
 
 const initialFormData = {
   status: "",
@@ -37,6 +38,7 @@ function AdminOrderDetailsView({ orderDetails }) {
         setFormData(initialFormData);
         toast({
           title: data?.payload?.message,
+          
         });
       }
     });
@@ -56,7 +58,7 @@ function AdminOrderDetailsView({ orderDetails }) {
           </div>
           <div className="flex mt-2 items-center justify-between">
             <p className="font-medium">Giá trị đơn hàng</p>
-            <Label>{orderDetails?.totalAmount} VND</Label>
+            <Label>{formatPrice(orderDetails?.totalAmount)}</Label>
           </div>
           <div className="flex mt-2 items-center justify-between">
             <p className="font-medium">Phương thức thanh toán</p>
@@ -93,7 +95,7 @@ function AdminOrderDetailsView({ orderDetails }) {
                     <li className="flex items-center justify-between">
                       <span>Tên mặt hàng: {item.title}</span>
                       <span>Số lượng: {item.quantity}</span>
-                      <span>Giá: {item.price} VND</span>
+                      <span>Giá: {formatPrice(item.price)}</span>
                     </li>
                   ))
                 : null}
@@ -118,21 +120,21 @@ function AdminOrderDetailsView({ orderDetails }) {
           <CommonForm
             formControls={[
               {
-                label: "Order Status",
+                label: "Trạng thái đơn hàng",
                 name: "status",
                 componentType: "select",
                 options: [
-                  { id: "pending", label: "Pending" },
-                  { id: "inProcess", label: "In Process" },
-                  { id: "inShipping", label: "In Shipping" },
-                  { id: "delivered", label: "Delivered" },
-                  { id: "rejected", label: "Rejected" },
+                  { id: "pending", label: "Đang chờ" },
+                  { id: "inProcess", label: "Đang xử lý" },
+                  { id: "inShipping", label: "Đang giao hàng" },
+                  { id: "delivered", label: "Đã giao hàng" },
+                  { id: "rejected", label: "Đã hủy" },
                 ],
               },
             ]}
             formData={formData}
             setFormData={setFormData}
-            buttonText={"Update Order Status"}
+            buttonText={"Cập nhật trạng thái đơn hàng"}
             onSubmit={handleUpdateStatus}
           />
         </div>

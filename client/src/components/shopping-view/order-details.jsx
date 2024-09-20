@@ -3,6 +3,7 @@ import { Badge } from "../ui/badge";
 import { DialogContent } from "../ui/dialog";
 import { Label } from "../ui/label";
 import { Separator } from "../ui/separator";
+import { formatPrice } from "@/lib/utils";
 
 function ShoppingOrderDetailsView({ orderDetails }) {
   const { user } = useSelector((state) => state.auth);
@@ -21,7 +22,7 @@ function ShoppingOrderDetailsView({ orderDetails }) {
           </div>
           <div className="flex mt-2 items-center justify-between">
             <p className="font-medium">Giá đơn hàng</p>
-            <Label>{orderDetails?.totalAmount} VND</Label>
+            <Label>{formatPrice(orderDetails?.totalAmount)}</Label>
           </div>
           <div className="flex mt-2 items-center justify-between">
             <p className="font-medium">Phương thức thanh toán</p>

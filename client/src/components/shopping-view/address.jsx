@@ -13,6 +13,7 @@ import AddressCard from "./address-card";
 import { useToast } from "../ui/use-toast";
 
 const initialAddressFormData = {
+  name: "",
   address: "",
   city: "",
   phone: "",
@@ -34,7 +35,7 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
     if (addressList.length >= 3 && currentEditedId === null) {
       setFormData(initialAddressFormData);
       toast({
-        title: "You can add max 3 addresses",
+        title: "Bạn có thể thêm tối đa 3 địa chỉ",
         variant: "destructive",
       });
 
@@ -54,7 +55,8 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
             setCurrentEditedId(null);
             setFormData(initialAddressFormData);
             toast({
-              title: "Address updated successfully",
+              title: "Cập nhật địa chỉ thành công",
+              
             });
           }
         })
@@ -68,7 +70,7 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
             dispatch(fetchAllAddresses(user?.id));
             setFormData(initialAddressFormData);
             toast({
-              title: "Address added successfully",
+              title: "Thêm địa chỉ thành công",
             });
           }
         });
@@ -81,7 +83,7 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
       if (data?.payload?.success) {
         dispatch(fetchAllAddresses(user?.id));
         toast({
-          title: "Address deleted successfully",
+          title: "Xóa địa chỉ thành công",
         });
       }
     });
@@ -91,6 +93,7 @@ function Address({ setCurrentSelectedAddress, selectedId }) {
     setCurrentEditedId(getCuurentAddress?._id);
     setFormData({
       ...formData,
+      name: getCuurentAddress?.name,
       address: getCuurentAddress?.address,
       city: getCuurentAddress?.city,
       phone: getCuurentAddress?.phone,

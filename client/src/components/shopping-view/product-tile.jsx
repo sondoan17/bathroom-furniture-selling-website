@@ -2,12 +2,13 @@ import { Card, CardContent, CardFooter } from "../ui/card";
 import { Button } from "../ui/button";
 import { brandOptionsMap, categoryOptionsMap } from "@/config";
 import { Badge } from "../ui/badge";
-
+import { formatPrice } from "@/lib/utils";
 function ShoppingProductTile({
   product,
   handleGetProductDetails,
   handleAddtoCart,
 }) {
+  console.log(product);
   return (
     <Card className="w-full max-w-sm mx-auto ">
       <div onClick={() => handleGetProductDetails(product?._id)}>
@@ -47,11 +48,11 @@ function ShoppingProductTile({
                 product?.salePrice > 0 ? "line-through" : ""
               } text-base sm:text-lg font-semibold text-primary`}
             >
-              {product?.price==0 ? "Liên hệ" : `${product?.price}`}
+              {product?.price==0 ? "Liên hệ" : formatPrice(product?.price)}
             </span>
             {product?.salePrice > 0 ? (
               <span className="text-base sm:text-lg font-semibold text-primary">
-                {product?.salePrice} VND
+                {formatPrice(product?.salePrice)}
               </span>
             ) : null}
           </div>

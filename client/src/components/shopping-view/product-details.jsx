@@ -20,6 +20,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import { formatPrice } from "@/lib/utils";
 
 function ProductDetailsDialog({ open, setOpen, productDetails }) {
   const [reviewMsg, setReviewMsg] = useState("");
@@ -116,8 +117,8 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
 
   return (
     <Dialog open={open} onOpenChange={handleDialogClose}>
-      <DialogContent className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-10 p-4 sm:p-6 md:p-8 lg:p-12 max-w-[95vw] sm:max-w-[90vw] md:max-w-[85vw] lg:max-w-[90vw]">
-        <div className="relative rounded-lg md:max-w-[400px] md:mx-auto">
+      <DialogContent className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-10 p-4 sm:p-6 md:p-8 lg:p-12 max-w-[95vw] sm:max-w-[90vw] md:max-w-[85vw] lg:max-w-[90vw] lg:min-h-[70vh]">
+        <div className="relative rounded-lg md:max-w-[650px] md:mx-auto">
           <Carousel plugins={[Autoplay({ delay: 5000 })]}>
             <CarouselContent>
               {productImages.map((image, index) => (
@@ -142,7 +143,7 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
                 text-muted-foreground text-sm sm:text-base md:text-lg 
                 mb-3 sm:mb-4 md:mb-5 
                 overflow-x-auto overflow-y-auto 
-                max-h-[150px] sm:max-h-[200px] md:max-h-[300px] 
+                max-h-[150px] sm:max-h-[200px] md:max-h-[300px] lg:max-h-[400px]
                 whitespace-pre-wrap
                 scrollbar-rounded
               "
@@ -155,11 +156,11 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
               className={`text-xl sm:text-2xl md:text-3xl font-bold text-primary ${productDetails?.salePrice > 0 ? "line-through" : ""
                 }`}
             >
-              {productDetails?.price == 0 ? "Liên hệ" : `${productDetails?.price}`}
+              {productDetails?.price == 0 ? "Liên hệ" : formatPrice(productDetails?.price)}
             </p>
             {productDetails?.salePrice > 0 && (
               <p className="text-lg sm:text-xl md:text-2xl font-bold text-muted-foreground mt-1 sm:mt-0">
-                VND{productDetails?.salePrice}
+                {formatPrice(productDetails?.salePrice)}
               </p>
             )}
           </div>

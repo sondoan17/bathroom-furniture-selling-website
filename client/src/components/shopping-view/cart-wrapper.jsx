@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
 import UserCartItemsContent from "./cart-items-content";
+import { formatPrice } from "@/lib/utils";
 
 function UserCartWrapper({ cartItems, setOpenCartSheet }) {
   const navigate = useNavigate();
@@ -32,18 +33,18 @@ function UserCartWrapper({ cartItems, setOpenCartSheet }) {
       <div className="mt-8 space-y-4">
         <div className="flex justify-between">
           <span className="font-bold">Tổng cộng</span>
-          <span className="font-bold">{totalCartAmount} VND</span>
+          <span className="font-bold">{formatPrice(totalCartAmount)}</span>
         </div>
       </div>
       <Button
-        disabled={true}
+        disabled={cartItems && cartItems.length === 0}
         onClick={() => {
           navigate("/shop/checkout");
           setOpenCartSheet(false);
         }}
         className="w-full mt-6"
       >
-        Tính năng đang được phát triển
+        Thanh toán
       </Button>
     </SheetContent>
   );

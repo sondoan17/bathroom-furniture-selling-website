@@ -8,7 +8,7 @@ function PaymentSuccessPage() {
   return (
     <Card className="p-10">
       <CardHeader className="p-0">
-        <CardTitle className="text-4xl">Payment is successfull!</CardTitle>
+        <CardTitle className="text-4xl">Thanh toán thành công!</CardTitle>
       </CardHeader>
       <Button className="mt-5" onClick={() => navigate("/shop/account")}>
         View Orders

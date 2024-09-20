@@ -154,18 +154,18 @@ const deleteProduct = async (req, res) => {
     if (!product)
       return res.status(404).json({
         success: false,
-        message: "Product not found",
+        message: "Không tìm thấy sản phẩm!",
       });
 
     res.status(200).json({
       success: true,
-      message: "Product delete successfully",
+      message: "Sản phẩm được xóa thành công!",
     });
   } catch (e) {
     console.log(e);
     res.status(500).json({
       success: false,
-      message: "Error occured",
+      message: "Có lỗi xảy ra!",
     });
   }
 };
