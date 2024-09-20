@@ -6,8 +6,8 @@ import { Separator } from "../ui/separator";
 import { formatPrice } from "@/lib/utils";
 
 function ShoppingOrderDetailsView({ orderDetails }) {
-  const { user } = useSelector((state) => state.auth);
-  console.log(orderDetails)
+
+ 
   return (
     <DialogContent className="sm:max-w-[600px]">
       <div className="grid gap-6">
