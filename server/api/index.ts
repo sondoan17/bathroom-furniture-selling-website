@@ -16,6 +16,7 @@ import commonFeatureRouter from '../routes/common/feature-routes';
 import testvercelRouter from '../routes/testvercel/testvercel-routes';
 dotenv.config();
 
+const allowedOrigins = process.env.FRONTEND_URL?.split(',') || [];
 
 mongoose.connect(process.env.MONGODB_URI as string)
   
@@ -23,7 +24,16 @@ mongoose.connect(process.env.MONGODB_URI as string)
 const app = express();
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: function (origin, callback) {
+
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        var msg = 'The CORS policy for this site does not ' +
+                  'allow access from the specified Origin.';
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",
@@ -49,7 +59,5 @@ app.use("/api/shop/order", shopOrderRouter);
 app.use("/api/shop/search", shopSearchRouter);
 app.use("/api/shop/review", shopReviewRouter);
 app.use("/api/common/feature", commonFeatureRouter);
-
-
 
 export default app
