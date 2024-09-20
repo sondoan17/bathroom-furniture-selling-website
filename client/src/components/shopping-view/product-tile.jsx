@@ -8,7 +8,7 @@ function ShoppingProductTile({
   handleGetProductDetails,
   handleAddtoCart,
 }) {
-  console.log(product);
+ 
   return (
     <Card className="w-full max-w-sm mx-auto ">
       <div onClick={() => handleGetProductDetails(product?._id)}>
