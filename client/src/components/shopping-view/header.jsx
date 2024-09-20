@@ -49,12 +49,27 @@ function MenuItems() {
       : navigate(getCurrentMenuItem.path);
   }
 
+  function isActive(menuItem) {
+    if (menuItem.id === 'home') {
+      return location.pathname === '/shop/home';
+    }
+    if (menuItem.id === 'products') {
+      return location.pathname.includes(menuItem.path) && !searchParams.get('category');
+    }
+    if (menuItem.id !== 'search') {
+      return location.pathname.includes('listing') && searchParams.get('category') === menuItem.id;
+    }
+    return location.pathname.includes(menuItem.path);
+  }
+
   return (
     <nav className="flex flex-col mb-3 lg:mb-0 lg:items-center gap-6 lg:flex-row">
       {shoppingViewHeaderMenuItems.map((menuItem) => (
         <Label
           onClick={() => handleNavigate(menuItem)}
-          className="text-sm font-medium cursor-pointer"
+          className={`text-sm font-medium cursor-pointer ${
+            isActive(menuItem) ? 'font-bold' : ''
+          }`}
           key={menuItem.id}
         >
           {menuItem.label}
