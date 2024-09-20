@@ -178,6 +178,7 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
                     productDetails?.totalStock
                   )
                 }
+                disabled={productDetails?.price === 0}
               >
                 Thêm vào giỏ hàng
               </Button>
