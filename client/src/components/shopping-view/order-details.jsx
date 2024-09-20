@@ -7,7 +7,7 @@ import { formatPrice } from "@/lib/utils";
 
 function ShoppingOrderDetailsView({ orderDetails }) {
   const { user } = useSelector((state) => state.auth);
-
+  console.log(orderDetails)
   return (
     <DialogContent className="sm:max-w-[600px]">
       <div className="grid gap-6">
@@ -70,7 +70,7 @@ function ShoppingOrderDetailsView({ orderDetails }) {
           <div className="grid gap-2">
             <div className="font-medium">Thông tin giao hàng</div>
             <div className="grid gap-0.5 text-muted-foreground">
-              <span>{user.userName}</span>
+              <span>{orderDetails?.addressInfo?.name}</span>
               <span>{orderDetails?.addressInfo?.address}</span>
               <span>{orderDetails?.addressInfo?.city}</span>
               <span>{orderDetails?.addressInfo?.pincode}</span>

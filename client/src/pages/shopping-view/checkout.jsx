@@ -62,6 +62,7 @@ function ShoppingCheckout() {
         quantity: singleCartItem?.quantity,
       })),
       addressInfo: {
+        name: currentSelectedAddress?.name,
         addressId: currentSelectedAddress?._id,
         address: currentSelectedAddress?.address,
         city: currentSelectedAddress?.city,
