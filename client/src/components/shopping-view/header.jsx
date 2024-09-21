@@ -128,26 +128,28 @@ function HeaderRightContent(isAuthenticated) {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Avatar className="bg-black">
-                <AvatarFallback className="bg-black text-white font-extrabold">
+                <AvatarFallback className="bg-black text-white font-extrabold hover:cursor-pointer">
                   {user?.userName[0].toUpperCase()}
                 </AvatarFallback>
               </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent side="right" className="w-56">
               <DropdownMenuLabel>
-                Logged in as {user?.userName}
+                {user?.userName}
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={() => navigate("/shop/account")}>
                 <UserCog className="mr-2 h-4 w-4" />
-                Account
+                Tài khoản
               </DropdownMenuItem>
               <DropdownMenuSeparator />
+
               <DropdownMenuItem onClick={handleLogout}>
                 <LogOut className="mr-2 h-4 w-4" />
-                Logout
+                Đăng xuất
               </DropdownMenuItem>
             </DropdownMenuContent>
+
           </DropdownMenu>
         </div>
       ) : (

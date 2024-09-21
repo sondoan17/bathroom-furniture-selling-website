@@ -43,18 +43,21 @@ function ShoppingOrders() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Order History</CardTitle>
+        <CardTitle>Lịch sử mua hàng</CardTitle>
       </CardHeader>
       <CardContent>
+
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Order ID</TableHead>
-              <TableHead>Order Date</TableHead>
-              <TableHead>Order Status</TableHead>
-              <TableHead>Order Price</TableHead>
+              <TableHead>Mã đơn hàng</TableHead>
+              <TableHead>Ngày đặt hàng</TableHead>
+              <TableHead>Trạng thái đơn hàng</TableHead>
+              <TableHead>Tổng tiền</TableHead>
               <TableHead>
-                <span className="sr-only">Details</span>
+                <span className="sr-only">Chi tiết</span>
+
+
               </TableHead>
             </TableRow>
           </TableHeader>

@@ -11,8 +11,10 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
+import searchImg from "../../assets/account-banner.png";
 
 function SearchProducts() {
+
   const [keyword, setKeyword] = useState("");
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -86,9 +88,17 @@ function SearchProducts() {
 
   return (
     <div className="container mx-auto md:px-6 px-4 py-8">
-      <div className="flex justify-center mb-8">
+      <div className="relative h-[300px] w-full overflow-hidden">
+        <img
+          src={searchImg}
+          className="h-full w-full object-cover object-center"
+        />
+
+      </div>
+      <div className="flex justify-center mb-8 mt-[50px] ">
         <div className="w-full flex items-center">
           <Input
+
             value={keyword}
             name="keyword"
             onChange={(event) => setKeyword(event.target.value)}
@@ -98,7 +108,7 @@ function SearchProducts() {
         </div>
       </div>
       {!searchResults.length ? (
-        <h1 className="text-5xl font-extrabold">Không tìm thấy kết quả!</h1>
+        <h1 className="text-4xl font-extrabold">Không tìm thấy kết quả!</h1>
       ) : null}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
         {searchResults.map((item) => (
