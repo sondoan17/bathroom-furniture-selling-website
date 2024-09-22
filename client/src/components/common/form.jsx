@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import {
@@ -18,6 +19,21 @@ function CommonForm({
   buttonText,
   isBtnDisabled,
 }) {
+  const [typeOptions, setTypeOptions] = useState([]);
+
+  useEffect(() => {
+
+    const categoryControl = formControls.find(control => control.name === "category");
+    if (categoryControl && categoryControl.options) {
+      const selectedCategory = categoryControl.options.find(option => option.id === formData.category);
+      if (selectedCategory && selectedCategory.type) {
+        setTypeOptions(selectedCategory.type.map(type => ({ id: type, label: type })));
+      } else {
+        setTypeOptions([]);
+      }
+    }
+  }, [formData.category, formControls]);
+
   function renderInputsByComponentType(getControlItem) {
     let element = null;
     const value = formData[getControlItem.name] || "";
@@ -39,9 +55,9 @@ function CommonForm({
             }
           />
         );
-
         break;
       case "select":
+        const options = getControlItem.name === "type" ? typeOptions : (getControlItem.options || []);
         element = (
           <Select
             onValueChange={(value) =>
@@ -56,8 +72,8 @@ function CommonForm({
               <SelectValue placeholder={getControlItem.label} />
             </SelectTrigger>
             <SelectContent>
-              {getControlItem.options && getControlItem.options.length > 0
-                ? getControlItem.options.map((optionItem) => (
+              {options.length > 0
+                ? options.map((optionItem) => (
                     <SelectItem key={optionItem.id} value={optionItem.id}>
                       {optionItem.label}
                     </SelectItem>
@@ -66,7 +82,6 @@ function CommonForm({
             </SelectContent>
           </Select>
         );
-
         break;
       case "textarea":
         element = (
@@ -83,25 +98,9 @@ function CommonForm({
             }
           />
         );
-
         break;
-
       default:
-        element = (
-          <Input
-            name={getControlItem.name}
-            placeholder={getControlItem.placeholder}
-            id={getControlItem.name}
-            type={getControlItem.type}
-            value={value}
-            onChange={(event) =>
-              setFormData({
-                ...formData,
-                [getControlItem.name]: event.target.value,
-              })
-            }
-          />
-        );
+        element = null;
         break;
     }
 

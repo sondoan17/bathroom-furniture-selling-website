@@ -8,11 +8,13 @@ const initialState = {
 };
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 export const fetchAllFilteredProducts = createAsyncThunk(
   "/products/fetchAllProducts",
   async ({ filterParams, sortParams }) => {
     const query = new URLSearchParams({
-      ...filterParams,
+      ...(filterParams.category && { category: filterParams.category }),
+      ...(filterParams.type && { type: filterParams.type }),
       sortBy: sortParams,
     });
 

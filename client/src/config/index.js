@@ -58,12 +58,20 @@ export const addProductFormElements = [
     name: "category",
     componentType: "select",
     options: [
-      { id: "toilet", label: "Bồn cầu" },
-      { id: "lavabo", label: "Chậu Lavabo" },
-      { id: "kitchensink", label: "Chậu rửa bát" },
-      { id: "bathroommirror", label: "Gương phòng tắm" },
-      { id: "shower", label: "Sen tắm" },
+      { id: "basincabinet", label: "Tủ chậu", type: ["PVC", "Nhôm"] },
+      { id: "stonetable", label: "Bàn đá", type: ["Không"] },
+      { id: "lavabo", label: "Lavabo", type: ["Tròn/Elip", "Vuông/Chữ nhật"] },
+      { id: "faucet", label: "Sen/vòi", type: ["Không"] },
+      { id: "toilet", label: "Bồn cầu/Tiểu treo", type: ["Không"] },
+      { id: "accessory", label: "Phụ kiện", type: ["Không"] },
     ],
+  },
+  {
+    label: "Loại",
+    name: "type",
+    componentType: "select",
+    options: [],
+    dependsOn: "category",
   },
   {
     label: "Thương hiệu",
@@ -106,28 +114,33 @@ export const shoppingViewHeaderMenuItems = [
     path: "/shop/listing",
   },
   {
-    id: "toilet",
-    label: "Bồn cầu",
+    id: "basincabinet",
+    label: "Tủ chậu",
+    path: "/shop/listing",
+  },
+  {
+    id: "stonetable",
+    label: "Bàn đá",
     path: "/shop/listing",
   },
   {
     id: "lavabo",
-    label: "Chậu Lavabo",
+    label: "Lavabo",
     path: "/shop/listing",
   },
   {
-    id: "kitchensink",
-    label: "Chậu rửa bát",
+    id: "faucet",
+    label: "Sen/vòi",
     path: "/shop/listing",
   },
   {
-    id: "bathroommirror",
-    label: "Gương phòng tắm",
+    id: "toilet",
+    label: "Bồn cầu/Tiểu treo",
     path: "/shop/listing",
   },
   {
-    id: "shower",
-    label: "Sen tắm",
+    id: "accessory",
+    label: "Phụ kiện",
     path: "/shop/listing",
   },
   {
@@ -138,24 +151,28 @@ export const shoppingViewHeaderMenuItems = [
 ];
 
 export const categoryOptionsMap = {
-  toilet: "Bồn cầu",
-  lavabo: "Chậu Lavabo",
-  kitchensink: "Chậu rửa bát",
-  bathroommirror: "Gương phòng tắm",
-  shower: "Sen tắm",
+  basincabinet: "Tủ chậu",
+  stonetable: "Bàn đá",
+  
+  lavabo: "Lavabo",
+  faucet: "Sen/vòi",
+  toilet: "Bồn cầu/Tiểu treo",
+  accessory: "Phụ kiện",
 };
 
 export const brandOptionsMap = {
   no: "Không",
 };
+
 export const filterTitle = ["Danh mục", "Thương hiệu"];
 export const filterOptions = {
   category: [
-    { id: "toilet", label: "Bồn cầu" },
-    { id: "lavabo", label: "Chậu Lavabo" },
-    { id: "kitchensink", label: "Chậu rửa bát" },
-    { id: "bathroommirror", label: "Gương phòng tắm" },
-    { id: "shower", label: "Sen tắm" },
+    { id: "basincabinet", label: "Tủ chậu", type: ["PVC", "Nhôm"] },
+    { id: "stonetable", label: "Bàn đá" },
+    { id: "lavabo", label: "Lavabo", type: ["Tròn/Elip", "Vuông/Chữ nhật"] },
+    { id: "faucet", label: "Sen/vòi" },
+    { id: "toilet", label: "Bồn cầu/Tiểu treo" },
+    { id: "accessory", label: "Phụ kiện" },
   ],
   brand: [{ id: "no", label: "Không" }],
 };

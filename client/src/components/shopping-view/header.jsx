@@ -30,6 +30,7 @@ function MenuItems() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   function handleNavigate(getCurrentMenuItem) {
+   
     sessionStorage.removeItem("filters");
     const currentFilter =
       getCurrentMenuItem.id !== "home" &&
@@ -37,6 +38,7 @@ function MenuItems() {
       getCurrentMenuItem.id !== "search"
         ? {
             category: [getCurrentMenuItem.id],
+           
           }
         : null;
 
