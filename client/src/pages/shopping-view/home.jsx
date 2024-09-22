@@ -19,26 +19,26 @@ import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import { getFeatureImages } from "@/store/common-slice";
 import {
   toilet,
+  basincabinet,
   lavabo,
-  kitchensink,
-  bathroommirror,
+  stonetable,
   shower,
 } from "@/assets/index";
 
 const categoriesWithIcon = [
   {
-    id: "toilet",
-    label: "Bồn cầu",
-    image: toilet,
+    id: "basincabinet",
+    label: "Tủ chậu",
+    image: basincabinet,
   },
-  { id: "lavabo", label: "Chậu Lavabo", image: lavabo },
-  { id: "kitchensink", label: "Chậu rửa bát", image: kitchensink },
+  { id: "stonetable", label: "Bàn đá", image: stonetable },
+  { id: "lavabo", label: "Lavabo", image: lavabo },
   {
-    id: "bathroommirror",
-    label: "Gương phòng tắm",
-    image: bathroommirror,
+    id: "faucet",
+    label: "Sen - Vòi",
+    image: shower,
   },
-  { id: "shower", label: "Sen tắm", image: shower },
+  { id: "toilet", label: "Bồn cầu", image: toilet },
 ];
 function ShoppingHome() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -62,7 +62,7 @@ function ShoppingHome() {
     };
 
     sessionStorage.setItem("filters", JSON.stringify(currentFilter));
-    navigate(`/shop/listing`);
+    navigate(`/shop/listing?category=${getCurrentItem.id}`);
   }
 
   function handleGetProductDetails(getCurrentProductId) {
@@ -199,7 +199,7 @@ function ShoppingHome() {
         setOpen={setOpenDetailsDialog}
         productDetails={productDetails}
       />
-      
+
     </div>
   );
 }

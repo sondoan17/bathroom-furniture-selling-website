@@ -116,32 +116,32 @@ export const shoppingViewHeaderMenuItems = [
   {
     id: "basincabinet",
     label: "Tủ chậu",
-    path: "/shop/listing",
+    path: "/shop/listing?category=basincabinet",
   },
   {
     id: "stonetable",
     label: "Bàn đá",
-    path: "/shop/listing",
+    path: "/shop/listing?category=stonetable",
   },
   {
     id: "lavabo",
     label: "Lavabo",
-    path: "/shop/listing",
+    path: "/shop/listing?category=lavabo",
   },
   {
     id: "faucet",
     label: "Sen/vòi",
-    path: "/shop/listing",
+    path: "/shop/listing?category=faucet",
   },
   {
     id: "toilet",
     label: "Bồn cầu/Tiểu treo",
-    path: "/shop/listing",
+    path: "/shop/listing?category=toilet",
   },
   {
     id: "accessory",
     label: "Phụ kiện",
-    path: "/shop/listing",
+    path: "/shop/listing?category=accessory",
   },
   {
     id: "search",
@@ -153,7 +153,6 @@ export const shoppingViewHeaderMenuItems = [
 export const categoryOptionsMap = {
   basincabinet: "Tủ chậu",
   stonetable: "Bàn đá",
-  
   lavabo: "Lavabo",
   faucet: "Sen/vòi",
   toilet: "Bồn cầu/Tiểu treo",

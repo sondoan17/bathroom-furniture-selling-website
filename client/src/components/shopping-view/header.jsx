@@ -23,32 +23,30 @@ import UserCartWrapper from "./cart-wrapper";
 import { useEffect, useState } from "react";
 import { fetchCartItems } from "@/store/shop/cart-slice";
 import { Label } from "../ui/label";
-
+import { logo } from "@/assets/index";
 function MenuItems() {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
 
   function handleNavigate(getCurrentMenuItem) {
-   
+
     sessionStorage.removeItem("filters");
     const currentFilter =
       getCurrentMenuItem.id !== "home" &&
-      getCurrentMenuItem.id !== "products" &&
-      getCurrentMenuItem.id !== "search"
+        getCurrentMenuItem.id !== "products" &&
+        getCurrentMenuItem.id !== "search"
         ? {
-            category: [getCurrentMenuItem.id],
-           
-          }
+          category: [getCurrentMenuItem.id],
+        }
         : null;
 
     sessionStorage.setItem("filters", JSON.stringify(currentFilter));
 
-    location.pathname.includes("listing") && currentFilter !== null
-      ? setSearchParams(
-          new URLSearchParams(`?category=${getCurrentMenuItem.id}`)
-        )
-      : navigate(getCurrentMenuItem.path);
+    setSearchParams(
+      new URLSearchParams(`?category=${getCurrentMenuItem.id}`)
+    )
+    navigate(getCurrentMenuItem.path);
   }
 
   function isActive(menuItem) {
@@ -69,9 +67,8 @@ function MenuItems() {
       {shoppingViewHeaderMenuItems.map((menuItem) => (
         <Label
           onClick={() => handleNavigate(menuItem)}
-          className={`text-sm font-medium cursor-pointer ${
-            isActive(menuItem) ? 'font-bold' : ''
-          }`}
+          className={`text-sm font-medium cursor-pointer ${isActive(menuItem) ? 'font-bold' : ''
+            }`}
           key={menuItem.id}
         >
           {menuItem.label}
@@ -84,7 +81,7 @@ function MenuItems() {
 function HeaderRightContent(isAuthenticated) {
   const { user } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.shopCart);
-  
+
   const [openCartSheet, setOpenCartSheet] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -171,7 +168,7 @@ function ShoppingHeader() {
     <header className="sticky top-0 z-40 w-full border-b bg-background">
       <div className="flex h-16 items-center justify-between px-4 md:px-6">
         <Link to="/shop/home" className="flex items-center gap-2">
-          <HousePlug className="h-6 w-6" />
+          <img src={logo} alt="logo" className="w-10 h-10" />
           <span className="font-bold">Shop Bảo Minh</span>
         </Link>
         <Sheet>
