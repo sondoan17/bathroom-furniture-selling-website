@@ -79,13 +79,13 @@ function ShoppingListing() {
   }
 
   useEffect(() => {
-    const category = searchParams.get('category');
-    const type = searchParams.get('type');
-    
+    const category = searchParams.get("category");
+    const type = searchParams.get("type");
+
     dispatch(
-      fetchAllFilteredProducts({ 
-        filterParams: { category, type }, 
-        sortParams: sort 
+      fetchAllFilteredProducts({
+        filterParams: { category, type },
+        sortParams: sort,
       })
     );
   }, [dispatch, sort, searchParams]);

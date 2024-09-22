@@ -11,7 +11,6 @@ import showroom from "./showroom4.png";
 import logo from "./logo-header.png";
 import basincabinet from "./basincabinet.jpg";
 
-
 export {
   toilet,
   lavabo,

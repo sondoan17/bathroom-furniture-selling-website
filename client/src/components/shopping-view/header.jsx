@@ -30,34 +30,37 @@ function MenuItems() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   function handleNavigate(getCurrentMenuItem) {
-
     sessionStorage.removeItem("filters");
     const currentFilter =
       getCurrentMenuItem.id !== "home" &&
-        getCurrentMenuItem.id !== "products" &&
-        getCurrentMenuItem.id !== "search"
+      getCurrentMenuItem.id !== "products" &&
+      getCurrentMenuItem.id !== "search"
         ? {
-          category: [getCurrentMenuItem.id],
-        }
+            category: [getCurrentMenuItem.id],
+          }
         : null;
 
     sessionStorage.setItem("filters", JSON.stringify(currentFilter));
 
-    setSearchParams(
-      new URLSearchParams(`?category=${getCurrentMenuItem.id}`)
-    )
+    setSearchParams(new URLSearchParams(`?category=${getCurrentMenuItem.id}`));
     navigate(getCurrentMenuItem.path);
   }
 
   function isActive(menuItem) {
-    if (menuItem.id === 'home') {
-      return location.pathname === '/shop/home';
+    if (menuItem.id === "home") {
+      return location.pathname === "/shop/home";
     }
-    if (menuItem.id === 'products') {
-      return location.pathname.includes(menuItem.path) && !searchParams.get('category');
+    if (menuItem.id === "products") {
+      return (
+        location.pathname.includes(menuItem.path) &&
+        !searchParams.get("category")
+      );
     }
-    if (menuItem.id !== 'search') {
-      return location.pathname.includes('listing') && searchParams.get('category') === menuItem.id;
+    if (menuItem.id !== "search") {
+      return (
+        location.pathname.includes("listing") &&
+        searchParams.get("category") === menuItem.id
+      );
     }
     return location.pathname.includes(menuItem.path);
   }
@@ -67,8 +70,9 @@ function MenuItems() {
       {shoppingViewHeaderMenuItems.map((menuItem) => (
         <Label
           onClick={() => handleNavigate(menuItem)}
-          className={`text-sm font-medium cursor-pointer ${isActive(menuItem) ? 'font-bold' : ''
-            }`}
+          className={`text-sm font-medium cursor-pointer ${
+            isActive(menuItem) ? "font-bold" : ""
+          }`}
           key={menuItem.id}
         >
           {menuItem.label}
@@ -133,9 +137,7 @@ function HeaderRightContent(isAuthenticated) {
               </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent side="right" className="w-56">
-              <DropdownMenuLabel>
-                {user?.userName}
-              </DropdownMenuLabel>
+              <DropdownMenuLabel>{user?.userName}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={() => navigate("/shop/account")}>
                 <UserCog className="mr-2 h-4 w-4" />
@@ -148,7 +150,6 @@ function HeaderRightContent(isAuthenticated) {
                 Đăng xuất
               </DropdownMenuItem>
             </DropdownMenuContent>
-
           </DropdownMenu>
         </div>
       ) : (
