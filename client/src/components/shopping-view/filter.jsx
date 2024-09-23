@@ -40,8 +40,8 @@ function ProductFilter() {
   };
 
   const handleCategoryChange = (category, isChecked) => {
-    const newCategories = { ...selectedCategories, [category]: isChecked };
-    const newTypes = { ...selectedTypes };
+    const newCategories = { [category]: isChecked };
+    const newTypes = {};
 
     if (!isChecked) {
       delete newTypes[category];
@@ -53,7 +53,7 @@ function ProductFilter() {
   };
 
   const handleTypeChange = (category, type, isChecked) => {
-    const newTypes = { ...selectedTypes };
+    const newTypes = {};
 
     if (isChecked) {
       newTypes[category] = type;
