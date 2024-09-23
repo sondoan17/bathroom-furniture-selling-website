@@ -58,12 +58,90 @@ export const addProductFormElements = [
     name: "category",
     componentType: "select",
     options: [
-      { id: "basincabinet", label: "Tủ chậu", type: ["PVC", "Nhôm"] },
-      { id: "stonetable", label: "Bàn đá", type: ["Không"] },
-      { id: "lavabo", label: "Lavabo", type: ["Tròn/Elip", "Vuông/Chữ nhật"] },
-      { id: "faucet", label: "Sen/vòi", type: ["Không"] },
-      { id: "toilet", label: "Bồn cầu/Tiểu treo", type: ["Không"] },
-      { id: "accessory", label: "Phụ kiện", type: ["Không"] },
+      {
+        id: "basincabinet",
+        label: "Tủ chậu",
+        types: [
+          {
+            name: "PVC",
+            subtypes: ["Vuông", "Chữ nhật"],
+          },
+          {
+            name: "Nhôm",
+            subtypes: ["Vuông", "Chữ nhật"],
+          },
+        ],
+      },
+      {
+        id: "stonetable",
+        label: "Bàn đá",
+        types: [
+          {
+            name: "Chậu âm",
+            subtypes: ["1 tầng", "2 tầng"],
+          },
+          {
+            name: "Chậu dương",
+            subtypes: ["1 tầng", "2 tầng"],
+          },
+        ],
+      },
+      {
+        id: "lavabo",
+        label: "Lavabo",
+        types: [
+          {
+            name: "Để bàn",
+            subtypes: ["Tròn/Elip", "Vuông/Chữ nhật"],
+          },
+          {
+            name: "Treo tường",
+            subtypes: ["Vuông/Chữ nhật"],
+          },
+        ],
+      },
+      {
+        id: "faucet",
+        label: "Sen/vòi",
+        types: [
+          {
+            name: "Vòi chậu",
+            subtypes: ["Vòi thường", "Vòi cảm ứng"],
+          },
+          {
+            name: "Sen",
+            subtypes: ["Bát sen", "Dây sen"],
+          },
+        ],
+      },
+      {
+        id: "toilet",
+        label: "Bồn cầu/Tiểu treo",
+        types: [
+          {
+            name: "Bồn cầu",
+            subtypes: ["Bồn cầu liền khối", "Bồn cầu thông minh"],
+          },
+          {
+            name: "Tiểu treo",
+            subtypes: ["Xả tự động", "Xả cơ"],
+          },
+        ],
+      },
+      {
+        id: "accessory",
+        label: "Phụ kiện",
+        types: [
+          {
+            name: "Kệ",
+            subtypes: ["Kệ gương", "Kệ góc"],
+          },
+          {
+            name: "Móc",
+            subtypes: ["Móc áo", "Móc treo khăn"],
+          },
+        ],
+      },
     ],
   },
   {
@@ -72,6 +150,13 @@ export const addProductFormElements = [
     componentType: "select",
     options: [],
     dependsOn: "category",
+  },
+  {
+    label: "Tính năng",
+    name: "subtype",
+    componentType: "select",
+    options: [],
+    dependsOn: "type",
   },
   {
     label: "Thương hiệu",
@@ -166,14 +251,56 @@ export const brandOptionsMap = {
 export const filterTitle = ["Danh mục", "Thương hiệu"];
 export const filterOptions = {
   category: [
-    { id: "basincabinet", label: "Tủ chậu", type: ["PVC", "Nhôm"] },
-    { id: "stonetable", label: "Bàn đá" },
-    { id: "lavabo", label: "Lavabo", type: ["Tròn/Elip", "Vuông/Chữ nhật"] },
-    { id: "faucet", label: "Sen/vòi" },
-    { id: "toilet", label: "Bồn cầu/Tiểu treo" },
-    { id: "accessory", label: "Phụ kiện" },
+    {
+      id: "basincabinet",
+      label: "Tủ chậu",
+      types: [
+        { name: "PVC", subtypes: ["Vuông", "Chữ nhật"] },
+        { name: "Nhôm", subtypes: ["Vuông", "Chữ nhật"] },
+      ],
+    },
+    {
+      id: "stonetable",
+      label: "Bàn đá",
+      types: [
+        { name: "Chậu âm", subtypes: ["1 tầng", "2 tầng"] },
+        { name: "Chậu dương", subtypes: ["1 tầng", "2 tầng"] },
+      ],
+    },
+    {
+      id: "lavabo",
+      label: "Lavabo",
+      types: [
+        { name: "Để bàn", subtypes: ["Tròn/Elip", "Vuông/Chữ nhật"] },
+        { name: "Treo tường", subtypes: ["Vuông/Chữ nhật"] },
+      ],
+    },
+    {
+      id: "faucet",
+      label: "Sen/vòi",
+      types: [
+        { name: "Vòi", subtypes: ["Vòi thường", "Vòi cảm ứng"] },
+        { name: "Sen", subtypes: ["Bát sen", "Dây sen"] },
+      ],
+    },
+    {
+      id: "toilet",
+      label: "Bồn cầu/Tiểu treo",
+      types: [
+        { name: "Bồn cầu", subtypes: ["Bồn cầu liền khối", "Bồn cầu thông minh"] },
+        { name: "Tiểu treo", subtypes: ["Xả tự động", "Xả cơ"] },
+      ],
+    },
+    {
+      id: "accessory",
+      label: "Phụ kiện",
+      types: [
+        { name: "Kệ", subtypes: ["Kệ gương", "Kệ góc"] },
+        { name: "Móc", subtypes: ["Móc áo", "Móc treo khăn"] },
+      ],
+    },
   ],
-  brand: [{ id: "no", label: "Không" }],
+  // brand: [{ id: "no", label: "Không" }],
 };
 
 export const sortOptions = [

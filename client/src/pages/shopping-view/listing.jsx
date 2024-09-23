@@ -81,10 +81,10 @@ function ShoppingListing() {
   useEffect(() => {
     const category = searchParams.get("category");
     const type = searchParams.get("type");
-
+    const subtype = searchParams.get("subtype");
     dispatch(
       fetchAllFilteredProducts({
-        filterParams: { category, type },
+        filterParams: { category, type, subtype },
         sortParams: sort,
       })
     );

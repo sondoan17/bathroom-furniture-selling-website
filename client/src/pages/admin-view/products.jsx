@@ -29,6 +29,7 @@ const initialFormData = {
   description: "",
   category: "",
   type: "",
+  subtype: "",
   brand: "",
   price: "",
   salePrice: "",
@@ -119,6 +120,7 @@ function AdminProducts() {
     dispatch(fetchAllProducts());
   }, [dispatch]);
 
+ 
   return (
     <Fragment>
       <div className="mb-5 w-full flex justify-end">

@@ -32,6 +32,7 @@ const addProduct = async (req, res) => {
       title,
       description,
       type,
+      subtype,
       category,
       // brand,
       price,
@@ -52,6 +53,7 @@ const addProduct = async (req, res) => {
       description,
       category,
       type,
+      subtype,
       // brand,
       price,
       salePrice,
@@ -105,6 +107,7 @@ const editProduct = async (req, res) => {
       description,
       type,
       category,
+      subtype,
       // brand,
       price,
       salePrice,
@@ -123,6 +126,7 @@ const editProduct = async (req, res) => {
     findProduct.description = description || findProduct.description;
     findProduct.category = category || findProduct.category;
     findProduct.type = type || findProduct.type;
+    findProduct.subtype = subtype || findProduct.subtype;
     // findProduct.brand = brand || findProduct.brand;
     findProduct.price = price === "" ? 0 : price || findProduct.price;
     findProduct.salePrice =

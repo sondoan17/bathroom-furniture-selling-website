@@ -20,19 +20,39 @@ function CommonForm({
   isBtnDisabled,
 }) {
   const [typeOptions, setTypeOptions] = useState([]);
+  const [subtypeOptions, setSubtypeOptions] = useState([]);
 
   useEffect(() => {
-
     const categoryControl = formControls.find(control => control.name === "category");
+    
     if (categoryControl && categoryControl.options) {
       const selectedCategory = categoryControl.options.find(option => option.id === formData.category);
-      if (selectedCategory && selectedCategory.type) {
-        setTypeOptions(selectedCategory.type.map(type => ({ id: type, label: type })));
+      if (selectedCategory && selectedCategory.types) {
+        setTypeOptions(selectedCategory.types.map(type => ({ id: type.name, label: type.name })));
+        setFormData(prevData => ({ ...prevData, type: "", subtype: "" }));
       } else {
         setTypeOptions([]);
+        setSubtypeOptions([]);
       }
     }
-  }, [formData.category, formControls]);
+  }, [formData.category, formControls, setFormData]);
+
+  useEffect(() => {
+    const categoryControl = formControls.find(control => control.name === "category");
+    
+    if (categoryControl && categoryControl.options) {
+      const selectedCategory = categoryControl.options.find(option => option.id === formData.category);
+      if (selectedCategory && selectedCategory.types) {
+        const selectedType = selectedCategory.types.find(type => type.name === formData.type);
+        if (selectedType && selectedType.subtypes) {
+          setSubtypeOptions(selectedType.subtypes.map(subtype => ({ id: subtype, label: subtype })));
+          setFormData(prevData => ({ ...prevData, subtype: "" }));
+        } else {
+          setSubtypeOptions([]);
+        }
+      }
+    }
+  }, [formData.category, formData.type, formControls, setFormData]);
 
   function renderInputsByComponentType(getControlItem) {
     let element = null;
@@ -57,7 +77,14 @@ function CommonForm({
         );
         break;
       case "select":
-        const options = getControlItem.name === "type" ? typeOptions : (getControlItem.options || []);
+        let options;
+        if (getControlItem.name === "type") {
+          options = typeOptions;
+        } else if (getControlItem.name === "subtype") {
+          options = subtypeOptions;
+        } else {
+          options = getControlItem.options || [];
+        }
         element = (
           <Select
             onValueChange={(value) =>
