@@ -153,13 +153,13 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
           </div>
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 sm:mb-4">
             <p
-              className={`text-xl sm:text-2xl md:text-3xl font-bold text-primary ${productDetails?.salePrice > 0 ? "line-through" : ""
+              className={`text-xl sm:text-2xl md:text-3xl font-thin text-primary ${productDetails?.salePrice > 0 ? "line-through" : ""
                 }`}
             >
               {productDetails?.price == 0 ? "Liên hệ" : formatPrice(productDetails?.price)}
             </p>
             {productDetails?.salePrice > 0 && (
-              <p className="text-lg sm:text-xl md:text-2xl font-bold text-muted-foreground mt-1 sm:mt-0">
+              <p className="text-lg sm:text-xl md:text-2xl font-bold text-red-500 mt-1 sm:mt-0">
                 {formatPrice(productDetails?.salePrice)}
               </p>
             )}
