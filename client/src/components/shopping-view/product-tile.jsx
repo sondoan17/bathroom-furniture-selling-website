@@ -3,14 +3,31 @@ import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { formatPrice } from "@/lib/utils";
 import { ShoppingCart } from "lucide-react";
+import { useSelector } from "react-redux";
+import { useToast } from "@/components/ui/use-toast";
 
 function ShoppingProductTile({
   product,
   handleGetProductDetails,
   handleAddtoCart,
 }) {
+  const { user } = useSelector((state) => state.auth);
+  const { toast } = useToast();
+
+  const handleAddToCartClick = () => {
+    if (user) {
+      handleAddtoCart(product?._id, product?.totalStock);
+    } else {
+      toast({
+        title: "Vui lòng đăng nhập để thêm vào giỏ hàng",
+        variant: "destructive",
+        duration: 3000,
+      });
+    }
+  };
+
   return (
-    <Card className="w-full min-h-[400px] max-w-sm mx-auto hover:shadow-lg transition-shadow flex flex-col justify-between">
+    <Card className="w-full min-h-[400px] max-w-sm mx-auto hover:shadow-lg transition-shadow flex flex-col justify-between cursor-pointer">
       <div
         onClick={() => handleGetProductDetails(product?._id)}
         className="flex-grow"
@@ -19,7 +36,7 @@ function ShoppingProductTile({
           <img
             src={product?.image1}
             alt={product?.title}
-            className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover rounded-t-lg"
+            className="w-full h-[300px] sm:h-[300px] md:h-[300px] object-cover rounded-t-lg"
           />
           {product?.totalStock === 0 ? (
             <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600 text-xs sm:text-sm">
@@ -58,7 +75,7 @@ function ShoppingProductTile({
           </Button>
         ) : (
           <Button
-            onClick={() => handleAddtoCart(product?._id, product?.totalStock)}
+            onClick={handleAddToCartClick}
             className="text-sm sm:text-base"
           >
             <ShoppingCart />
