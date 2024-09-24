@@ -10,8 +10,11 @@ function ShoppingProductTile({
   handleAddtoCart,
 }) {
   return (
-    <Card className="w-full max-w-sm mx-auto hover:shadow-lg transition-shadow mb-4 cursor-pointer">
-      <div onClick={() => handleGetProductDetails(product?._id)}>
+    <Card className="w-full min-h-[400px] max-w-sm mx-auto hover:shadow-lg transition-shadow flex flex-col justify-between">
+      <div
+        onClick={() => handleGetProductDetails(product?._id)}
+        className="flex-grow"
+      >
         <div className="relative">
           <img
             src={product?.image1}

@@ -91,11 +91,11 @@ export const addProductFormElements = [
         label: "Bồn cầu",
         types: [
           {
-            name: "Bồn cầu liền khối",
+            name: "Liền khối",
             subtypes: ["No"],
           },
           {
-            name: "Bồn cầu thông minh",
+            name: "Thông minh",
             subtypes: ["No"],
           },
         ],
@@ -290,8 +290,8 @@ export const filterOptions = {
       id: "toilet",
       label: "Bồn cầu",
       types: [
-        { name: "Bồn cầu liền khối", subtypes: ["No"] },
-        { name: "Bồn cầu thông minh", subtypes: ["No"] },
+        { name: "Liền khối", subtypes: ["No"] },
+        { name: "Thông minh", subtypes: ["No"] },
       ],
     },
     {
