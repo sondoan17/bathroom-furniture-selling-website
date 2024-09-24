@@ -118,10 +118,10 @@ function ShoppingListing() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-[200px]">
                 <DropdownMenuRadioGroup value={sort} onValueChange={handleSort}>
-                  {sortOptions.map((sortItem) => (
+                  {sortOptions.map((sortItem, index) => (
                     <DropdownMenuRadioItem
                       value={sortItem.id}
-                      key={sortItem.id}
+                      key={sortItem.id || index}
                     >
                       {sortItem.label}
                     </DropdownMenuRadioItem>
@@ -133,9 +133,9 @@ function ShoppingListing() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
           {productList && productList.length > 0
-            ? productList.map((productItem) => (
+            ? productList.map((productItem, index) => (
                 <ShoppingProductTile
-                  key={productItem.id}
+                  key={productItem.id || index}
                   handleGetProductDetails={handleGetProductDetails}
                   product={productItem}
                   handleAddtoCart={handleAddtoCart}
