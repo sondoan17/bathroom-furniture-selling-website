@@ -32,7 +32,9 @@ function ShoppingProductTile({
           ) : null}
         </div>
         <CardContent className="p-2 sm:p-4">
-          <h2 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 truncate">{product?.title}</h2>
+          <h2 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 truncate">
+            {product?.title}
+          </h2>
           <div className="flex justify-between items-center mb-1 sm:mb-2">
             <span className="text-sm sm:text-base text-muted-foreground">
               {categoryOptionsMap[product?.category]}
@@ -47,7 +49,7 @@ function ShoppingProductTile({
                 product?.salePrice > 0 ? "line-through" : ""
               } text-base sm:text-lg font-semibold text-primary`}
             >
-              {product?.price==0 ? "Liên hệ" : formatPrice(product?.price)}
+              {product?.price == 0 ? "Liên hệ" : formatPrice(product?.price)}
             </span>
             {product?.salePrice > 0 ? (
               <span className="text-base sm:text-lg font-semibold text-primary">

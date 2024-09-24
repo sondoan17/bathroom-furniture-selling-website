@@ -19,8 +19,6 @@ export const fetchAllFilteredProducts = createAsyncThunk(
       sortBy: sortParams,
     });
 
-    
-
     const result = await axios.get(
       `${backendUrl}/api/shop/products/get?${query}`
     );

@@ -287,7 +287,10 @@ export const filterOptions = {
       id: "toilet",
       label: "Bồn cầu/Tiểu treo",
       types: [
-        { name: "Bồn cầu", subtypes: ["Bồn cầu liền khối", "Bồn cầu thông minh"] },
+        {
+          name: "Bồn cầu",
+          subtypes: ["Bồn cầu liền khối", "Bồn cầu thông minh"],
+        },
         { name: "Tiểu treo", subtypes: ["Xả tự động", "Xả cơ"] },
       ],
     },

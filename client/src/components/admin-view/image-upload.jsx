@@ -78,13 +78,19 @@ function ProductImageUpload({
   }
 
   useEffect(() => {
-    const imageFiles = [imageFile1, imageFile2, imageFile3, imageFile4, imageFile5];
+    const imageFiles = [
+      imageFile1,
+      imageFile2,
+      imageFile3,
+      imageFile4,
+      imageFile5,
+    ];
     const setUploadedImageUrls = [
       setUploadedImageUrl1,
       setUploadedImageUrl2,
       setUploadedImageUrl3,
       setUploadedImageUrl4,
-      setUploadedImageUrl5
+      setUploadedImageUrl5,
     ];
 
     imageFiles.forEach((file, index) => {
@@ -94,7 +100,13 @@ function ProductImageUpload({
     });
   }, [imageFile1, imageFile2, imageFile3, imageFile4, imageFile5]);
 
-  const renderImageUploadField = (imageFile, setImageFile, uploadedImageUrl, inputRef, index) => (
+  const renderImageUploadField = (
+    imageFile,
+    setImageFile,
+    uploadedImageUrl,
+    inputRef,
+    index
+  ) => (
     <div
       key={index}
       onDragOver={handleDragOver}
@@ -130,7 +142,7 @@ function ProductImageUpload({
           </div>
           <p className="text-sm font-medium">
             {imageFile.name.length > 20
-              ? imageFile.name.substring(0, 20) + '...'
+              ? imageFile.name.substring(0, 20) + "..."
               : imageFile.name}
           </p>
           <Button
@@ -149,14 +161,46 @@ function ProductImageUpload({
 
   return (
     <div className={`w-full mt-4 ${isCustomStyling ? "" : "max-w-md mx-auto"}`}>
-      <Label className="text-lg font-semibold mb-2 block">Tải lên hình ảnh</Label>
-      {renderImageUploadField(imageFile1, setImageFile1, uploadedImageUrl1, inputRef1, 1)}
+      <Label className="text-lg font-semibold mb-2 block">
+        Tải lên hình ảnh
+      </Label>
+      {renderImageUploadField(
+        imageFile1,
+        setImageFile1,
+        uploadedImageUrl1,
+        inputRef1,
+        1
+      )}
       {!isDashboard && (
         <>
-          {renderImageUploadField(imageFile2, setImageFile2, uploadedImageUrl2, inputRef2, 2)}
-          {renderImageUploadField(imageFile3, setImageFile3, uploadedImageUrl3, inputRef3, 3)}
-          {renderImageUploadField(imageFile4, setImageFile4, uploadedImageUrl4, inputRef4, 4)}
-          {renderImageUploadField(imageFile5, setImageFile5, uploadedImageUrl5, inputRef5, 5)}
+          {renderImageUploadField(
+            imageFile2,
+            setImageFile2,
+            uploadedImageUrl2,
+            inputRef2,
+            2
+          )}
+          {renderImageUploadField(
+            imageFile3,
+            setImageFile3,
+            uploadedImageUrl3,
+            inputRef3,
+            3
+          )}
+          {renderImageUploadField(
+            imageFile4,
+            setImageFile4,
+            uploadedImageUrl4,
+            inputRef4,
+            4
+          )}
+          {renderImageUploadField(
+            imageFile5,
+            setImageFile5,
+            uploadedImageUrl5,
+            inputRef5,
+            5
+          )}
         </>
       )}
     </div>
