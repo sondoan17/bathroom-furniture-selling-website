@@ -36,6 +36,7 @@ const categoriesWithIcon = [
   },
   { id: "toilet", label: "Bồn cầu", image: toilet },
 ];
+
 function ShoppingHome() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { productList, productDetails } = useSelector(
@@ -106,6 +107,26 @@ function ShoppingHome() {
   useEffect(() => {
     dispatch(getFeatureImages());
   }, [dispatch]);
+
+  function getRandomProductsByCategory(productList, categories, count) {
+    const result = [];
+    categories.forEach((category) => {
+      const filteredProducts = productList.filter(
+        (product) => product.category === category.id
+      );
+      const randomProducts = filteredProducts
+        .sort(() => 0.5 - Math.random())
+        .slice(0, count);
+      result.push(...randomProducts);
+    });
+    return result;
+  }
+
+  const randomProducts = getRandomProductsByCategory(
+    productList,
+    categoriesWithIcon,
+    3
+  );
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -178,8 +199,8 @@ function ShoppingHome() {
             Sản phẩm nổi bật
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {productList && productList.length > 0
-              ? productList.map((productItem, index) => (
+            {randomProducts && randomProducts.length > 0
+              ? randomProducts.map((productItem, index) => (
                   <ShoppingProductTile
                     key={productItem.id || index}
                     handleGetProductDetails={handleGetProductDetails}
