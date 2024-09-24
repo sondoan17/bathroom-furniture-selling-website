@@ -37,7 +37,10 @@ function ProductFilter() {
         params.append("category", category);
         if (newTypes[category]) {
           params.append("type", newTypes[category]);
-          if (newSubtypes[category] && newSubtypes[category][newTypes[category]]) {
+          if (
+            newSubtypes[category] &&
+            newSubtypes[category][newTypes[category]]
+          ) {
             params.append("subtype", newSubtypes[category][newTypes[category]]);
           }
         }
@@ -109,7 +112,6 @@ function ProductFilter() {
         {Object.keys(filterOptions).map((keyItem, index) => (
           <Fragment key={index}>
             <div>
-              
               <div className="grid gap-2 mt-2">
                 {filterOptions[keyItem].map((option, optionIndex) => (
                   <div key={optionIndex}>
@@ -128,12 +130,18 @@ function ProductFilter() {
                       selectedCategories[option.id] && (
                         <div className="ml-6 mt-2 space-y-2">
                           {option.types.map((type, typeIndex) => (
-                            <div key={typeIndex} >
+                            <div key={typeIndex}>
                               <Label className="flex items-center gap-2 hover:cursor-pointer">
                                 <Checkbox
-                                  checked={selectedTypes[option.id] === type.name}
+                                  checked={
+                                    selectedTypes[option.id] === type.name
+                                  }
                                   onCheckedChange={(checked) =>
-                                    handleTypeChange(option.id, type.name, checked)
+                                    handleTypeChange(
+                                      option.id,
+                                      type.name,
+                                      checked
+                                    )
                                   }
                                 />
                                 {type.name}
@@ -142,41 +150,43 @@ function ProductFilter() {
                                 type.subtypes &&
                                 type.subtypes.length > 0 && (
                                   <div className="ml-6 mt-2 space-y-2">
-                                    {type.subtypes.map((subtype, subtypeIndex) => (
-                                      <Label
-                                        key={subtypeIndex}
-                                        className="flex items-center gap-2 hover:cursor-pointer"
-                                      >
-                                        <Checkbox
-                                          checked={
-                                            selectedSubtypes[option.id] &&
-                                            selectedSubtypes[option.id][type.name] === subtype
-                                          }
-                                          onCheckedChange={(checked) =>
-                                            handleSubtypeChange(
-                                              option.id,
-                                              type.name,
-                                              subtype,
-                                              checked
-                                            )
-                                          }
-                                        />
-                                        {subtype}
-                                      </Label>
-                                    ))}
+                                    {type.subtypes.map(
+                                      (subtype, subtypeIndex) => (
+                                        <Label
+                                          key={subtypeIndex}
+                                          className="flex items-center gap-2 hover:cursor-pointer"
+                                        >
+                                          <Checkbox
+                                            checked={
+                                              selectedSubtypes[option.id] &&
+                                              selectedSubtypes[option.id][
+                                                type.name
+                                              ] === subtype
+                                            }
+                                            onCheckedChange={(checked) =>
+                                              handleSubtypeChange(
+                                                option.id,
+                                                type.name,
+                                                subtype,
+                                                checked
+                                              )
+                                            }
+                                          />
+                                          {subtype}
+                                        </Label>
+                                      )
+                                    )}
                                   </div>
                                 )}
                             </div>
                           ))}
                         </div>
                       )}
-                  <Separator className="my-2" />
+                    <Separator className="my-2" />
                   </div>
-                  
                 ))}
               </div>
             </div>
-            
           </Fragment>
         ))}
       </div>
