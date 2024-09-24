@@ -36,12 +36,12 @@ function ShoppingProductTile({
             {product?.title}
           </h2>
           <div className="flex justify-between items-center mb-1 sm:mb-2">
-            <span className="text-sm sm:text-base text-muted-foreground">
+            {/* <span className="text-sm sm:text-base text-muted-foreground">
               {categoryOptionsMap[product?.category]}
-            </span>
-            <span className="text-sm sm:text-base text-muted-foreground">
+            </span> */}
+            {/* <span className="text-sm sm:text-base text-muted-foreground">
               {brandOptionsMap[product?.brand]}
-            </span>
+            </span> */}
           </div>
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-1 sm:mb-2">
             <span
@@ -52,7 +52,7 @@ function ShoppingProductTile({
               {product?.price == 0 ? "Liên hệ" : formatPrice(product?.price)}
             </span>
             {product?.salePrice > 0 ? (
-              <span className="text-base sm:text-lg font-semibold text-primary">
+              <span className="text-base sm:text-lg font-semibold text-red-500">
                 {formatPrice(product?.salePrice)}
               </span>
             ) : null}
