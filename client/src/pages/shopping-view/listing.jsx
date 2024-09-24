@@ -20,6 +20,7 @@ import { ArrowUpDownIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 function ShoppingListing() {
   const dispatch = useDispatch();
@@ -131,18 +132,32 @@ function ShoppingListing() {
             </DropdownMenu>
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-          {productList && productList.length > 0
-            ? productList.map((productItem, index) => (
-                <ShoppingProductTile
-                  key={productItem.id || index}
-                  handleGetProductDetails={handleGetProductDetails}
-                  product={productItem}
-                  handleAddtoCart={handleAddtoCart}
-                />
-              ))
-            : null}
-        </div>
+        <motion.div 
+          layout
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4"
+        >
+          <AnimatePresence>
+            {productList && productList.length > 0
+              ? productList.map((productItem, index) => (
+                  <motion.div
+
+                    key={productItem.id || index}
+                    layout
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <ShoppingProductTile
+                      handleGetProductDetails={handleGetProductDetails}
+                      product={productItem}
+                      handleAddtoCart={handleAddtoCart}
+                    />
+                  </motion.div>
+                ))
+              : null}
+          </AnimatePresence>
+        </motion.div>
       </div>
       <ProductDetailsDialog
         open={openDetailsDialog}

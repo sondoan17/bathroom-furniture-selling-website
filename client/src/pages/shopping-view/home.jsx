@@ -20,6 +20,7 @@ import {
   stonetable,
   shower,
 } from "@/assets/index";
+import { motion, AnimatePresence } from "framer-motion";
 
 const categoriesWithIcon = [
   {
@@ -132,19 +133,33 @@ function ShoppingHome() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <div className="relative w-full h-[600px] overflow-hidden">
-        {featureImageList && featureImageList.length > 0
-          ? featureImageList.map((slide, index) => (
-              <img
-                src={slide?.image}
-                key={index}
-                className={`${
-                  index === currentSlide ? "opacity-100" : "opacity-0"
-                } absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000`}
-              />
-            ))
-          : null}
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="flex flex-col min-h-screen"
+    >
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="relative w-full h-[600px] overflow-hidden"
+      >
+        <AnimatePresence initial={false}>
+          {featureImageList && featureImageList.length > 0
+            ? featureImageList.map((slide, index) => (
+                <motion.img
+                  key={slide.id || index}
+                  src={slide?.image}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: index === currentSlide ? 1 : 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="absolute top-0 left-0 w-full h-full object-cover"
+                />
+              ))
+            : null}
+        </AnimatePresence>
         <Button
           variant="outline"
           size="icon"
@@ -171,56 +186,107 @@ function ShoppingHome() {
         >
           <ChevronRightIcon className="w-4 h-4" />
         </Button>
-      </div>
-      <section className="py-12 bg-gray-50">
+      </motion.div>
+
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="py-12 bg-gray-50"
+      >
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">
             Danh mục sản phẩm
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {categoriesWithIcon.map((categoryItem) => (
-              <Card
-                key={categoryItem.id}
-                onClick={() =>
-                  handleNavigateToListingPage(categoryItem, "category")
+          <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.1
                 }
-                className="cursor-pointer hover:shadow-lg transition-shadow"
+              }
+            }}
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
+          >
+            {categoriesWithIcon.map((categoryItem) => (
+              <motion.div
+                key={categoryItem.id}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 }
+                }}
               >
-                <CardContent className="flex flex-col items-center justify-center p-6">
-                  <img src={categoryItem.image} alt="" className="rounded-sm" />
-                  <span className="font-bold">{categoryItem.label}</span>
-                </CardContent>
-              </Card>
+                <Card
+                  onClick={() =>
+                    handleNavigateToListingPage(categoryItem, "category")
+                  }
+                  className="cursor-pointer hover:shadow-lg transition-shadow"
+                >
+                  <CardContent className="flex flex-col items-center justify-center p-6">
+                    <img src={categoryItem.image} alt="" className="rounded-sm" />
+                    <span className="font-bold">{categoryItem.label}</span>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="py-12">
+      <motion.section 
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+        className="py-12"
+      >
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">
             Sản phẩm nổi bật
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.1
+                }
+              }
+            }}
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+          >
             {randomProducts && randomProducts.length > 0
               ? randomProducts.map((productItem, index) => (
-                  <ShoppingProductTile
+                  <motion.div
                     key={productItem.id || index}
-                    handleGetProductDetails={handleGetProductDetails}
-                    product={productItem}
-                    handleAddtoCart={handleAddtoCart}
-                  />
+                    variants={{
+                      hidden: { opacity: 0, y: 20 },
+                      visible: { opacity: 1, y: 0 }
+                    }}
+                  >
+                    <ShoppingProductTile
+                      handleGetProductDetails={handleGetProductDetails}
+                      product={productItem}
+                      handleAddtoCart={handleAddtoCart}
+                    />
+                  </motion.div>
                 ))
               : null}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
       <ProductDetailsDialog
         open={openDetailsDialog}
         setOpen={setOpenDetailsDialog}
         productDetails={productDetails}
       />
-    </div>
+    </motion.div>
   );
 }
 
