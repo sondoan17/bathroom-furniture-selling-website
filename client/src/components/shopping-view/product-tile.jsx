@@ -29,7 +29,7 @@ function ShoppingProductTile({
           ) : null}
         </div>
         <CardContent className="p-2 sm:p-4">
-          <h2 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 truncate">
+          <h2 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 break-words">
             {product?.title}
           </h2>
         </CardContent>
