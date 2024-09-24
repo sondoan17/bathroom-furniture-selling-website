@@ -45,6 +45,7 @@ function ShoppingHome() {
   const { featureImageList } = useSelector((state) => state.commonFeature);
 
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
+  const [randomProducts, setRandomProducts] = useState([]);
 
   const { user } = useSelector((state) => state.auth);
 
@@ -102,11 +103,19 @@ function ShoppingHome() {
         sortParams: "price-lowtohigh",
       })
     );
+    dispatch(getFeatureImages());
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getFeatureImages());
-  }, [dispatch]);
+    if (productList.length > 0) {
+      const randomProducts = getRandomProductsByCategory(
+        productList,
+        categoriesWithIcon,
+        3
+      );
+      setRandomProducts(randomProducts);
+    }
+  }, [productList]);
 
   function getRandomProductsByCategory(productList, categories, count) {
     const result = [];
@@ -121,12 +130,6 @@ function ShoppingHome() {
     });
     return result;
   }
-
-  const randomProducts = getRandomProductsByCategory(
-    productList,
-    categoriesWithIcon,
-    3
-  );
 
   return (
     <div className="flex flex-col min-h-screen">
