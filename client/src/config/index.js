@@ -91,12 +91,12 @@ export const addProductFormElements = [
         label: "Lavabo",
         types: [
           {
-            name: "Để bàn",
-            subtypes: ["Tròn/Elip", "Vuông/Chữ nhật"],
+            name: "Tròn + Elip",
+            subtypes: ["No"],
           },
           {
-            name: "Treo tường",
-            subtypes: ["Vuông/Chữ nhật"],
+            name: "Vuông +Chữ nhật",
+            subtypes: ["No"],
           },
         ],
       },
@@ -271,8 +271,8 @@ export const filterOptions = {
       id: "lavabo",
       label: "Lavabo",
       types: [
-        { name: "Để bàn", subtypes: ["Tròn/Elip", "Vuông/Chữ nhật"] },
-        { name: "Treo tường", subtypes: ["Vuông/Chữ nhật"] },
+        { name: "Tròn/Elip", subtypes: ["No"] },
+        { name: "Vuông/Chữ nhật", subtypes: ["No"] },
       ],
     },
     {

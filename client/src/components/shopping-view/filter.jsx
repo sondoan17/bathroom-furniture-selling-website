@@ -151,30 +151,31 @@ function ProductFilter() {
                                 type.subtypes.length > 0 && (
                                   <div className="ml-6 mt-2 space-y-2">
                                     {type.subtypes.map(
-                                      (subtype, subtypeIndex) => (
-                                        <Label
-                                          key={subtypeIndex}
-                                          className="flex items-center gap-2 hover:cursor-pointer"
-                                        >
-                                          <Checkbox
-                                            checked={
-                                              selectedSubtypes[option.id] &&
-                                              selectedSubtypes[option.id][
-                                                type.name
-                                              ] === subtype
-                                            }
-                                            onCheckedChange={(checked) =>
-                                              handleSubtypeChange(
-                                                option.id,
-                                                type.name,
-                                                subtype,
-                                                checked
-                                              )
-                                            }
-                                          />
-                                          {subtype}
-                                        </Label>
-                                      )
+                                      (subtype, subtypeIndex) =>
+                                        subtype !== "No" ? (
+                                          <Label
+                                            key={subtypeIndex}
+                                            className="flex items-center gap-2 hover:cursor-pointer"
+                                          >
+                                            <Checkbox
+                                              checked={
+                                                selectedSubtypes[option.id] &&
+                                                selectedSubtypes[option.id][
+                                                  type.name
+                                                ] === subtype
+                                              }
+                                              onCheckedChange={(checked) =>
+                                                handleSubtypeChange(
+                                                  option.id,
+                                                  type.name,
+                                                  subtype,
+                                                  checked
+                                                )
+                                              }
+                                            />
+                                            {subtype}
+                                          </Label>
+                                        ) : null
                                     )}
                                   </div>
                                 )}
