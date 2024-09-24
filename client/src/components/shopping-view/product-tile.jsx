@@ -1,6 +1,6 @@
 import { Card, CardContent, CardFooter } from "../ui/card";
 import { Button } from "../ui/button";
-import { brandOptionsMap, categoryOptionsMap } from "@/config";
+import {  categoryOptionsMap } from "@/config";
 import { Badge } from "../ui/badge";
 import { formatPrice } from "@/lib/utils";
 function ShoppingProductTile({

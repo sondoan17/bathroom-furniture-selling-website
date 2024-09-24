@@ -46,7 +46,12 @@ function AdminProductTile({
           >
             Sửa
           </Button>
-          <Button onClick={() => handleDelete(product?._id)}>Xóa</Button>
+          <Button
+            variant="destructive"
+            onClick={() => handleDelete(product?._id)}
+          >
+            Xóa
+          </Button>
         </CardFooter>
       </div>
     </Card>

@@ -158,12 +158,12 @@ export const addProductFormElements = [
     options: [],
     dependsOn: "type",
   },
-  {
-    label: "Thương hiệu",
-    name: "brand",
-    componentType: "select",
-    options: [{ id: "no", label: "Không" }],
-  },
+  // {
+  //   label: "Thương hiệu",
+  //   name: "brand",
+  //   componentType: "select",
+  //   options: [{ id: "no", label: "Không" }],
+  // },
   {
     label: "Giá",
     name: "price",
@@ -244,9 +244,9 @@ export const categoryOptionsMap = {
   accessory: "Phụ kiện",
 };
 
-export const brandOptionsMap = {
-  no: "Không",
-};
+// export const brandOptionsMap = {
+//   no: "Không",
+// };
 
 export const filterTitle = ["Danh mục", "Thương hiệu"];
 export const filterOptions = {
