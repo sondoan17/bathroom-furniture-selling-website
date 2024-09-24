@@ -8,10 +8,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="contact-info">
             <h3 className="text-lg font-semibold mb-4">Liên hệ với chúng tôi</h3>
-            <p className="mb-2"><House className="inline-block mr-1"/><strong>  Cơ sở 1:</strong> 142 Nguyễn Chính, Thịnh Liệt, Hoàng Mai, Hà Nội</p>
-            <p className="mb-2"><House className="inline-block mr-1"/><strong>Cơ sở 2:</strong> 22 Dương Công Khi, Tân Hiệp, Hóc Môn, TP.HCM</p>
-            <p className="mb-2"><Phone className="inline-block mr-1"/><strong>Số điện thoại:</strong> 0345366789</p>
-            <p className="mb-2"><Clock className="inline-block mr-1"/><strong>Giờ làm việc:</strong> 9:00 - 18:00</p>
+            <p className="mb-2 flex items-center"><House className="inline-block mr-2"/><span><strong>Cơ sở 1:</strong> 142 Nguyễn Chính, Thịnh Liệt, Hoàng Mai, Hà Nội</span></p>
+            <p className="mb-2 flex items-center"><House className="inline-block mr-2"/><span><strong>Cơ sở 2:</strong> 22 Dương Công Khi, Tân Hiệp, Hóc Môn, TP.HCM</span></p>
+            <p className="mb-2 flex items-center"><Phone className="inline-block mr-2"/><span><strong>Số điện thoại:</strong> 0345366789</span></p>
+            <p className="mb-2 flex items-center"><Clock className="inline-block mr-2"/><span><strong>Giờ làm việc:</strong> 9:00 - 18:00</span></p>
           </div>
           <div className="google-map">
             <h3 className="text-lg font-semibold mb-4">Bản đồ</h3>
