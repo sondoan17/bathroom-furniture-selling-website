@@ -282,8 +282,8 @@ export const filterOptions = {
       id: "stonetable",
       label: "Bàn đá",
       types: [
-        { name: "Chậu âm", subtypes: ["1 tầng", "2 tầng"] },
-        { name: "Chậu dương", subtypes: ["1 tầng", "2 tầng"] },
+        { name: "Chậu âm", subtypes: ["No"] },
+        { name: "Chậu dương", subtypes: ["No"] },
       ],
     },
     {
