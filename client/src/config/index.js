@@ -63,12 +63,12 @@ export const addProductFormElements = [
         label: "Tủ chậu",
         types: [
           {
-            name: "PVC",
-            subtypes: ["Vuông", "Chữ nhật"],
+            name: "TC PVC",
+            subtypes: ["No"],
           },
           {
-            name: "Nhôm",
-            subtypes: ["Vuông", "Chữ nhật"],
+            name: "TC Nhôm",
+            subtypes: ["No"],
           },
         ],
       },
@@ -78,11 +78,25 @@ export const addProductFormElements = [
         types: [
           {
             name: "Chậu âm",
-            subtypes: ["1 tầng", "2 tầng"],
+            subtypes: ["No"],
           },
           {
             name: "Chậu dương",
-            subtypes: ["1 tầng", "2 tầng"],
+            subtypes: ["No"],
+          },
+        ],
+      },
+      {
+        id: "toilet",
+        label: "Bồn cầu",
+        types: [
+          {
+            name: "Bồn cầu liền khối",
+            subtypes: ["No"],
+          },
+          {
+            name: "Bồn cầu thông minh",
+            subtypes: ["No"],
           },
         ],
       },
@@ -105,26 +119,26 @@ export const addProductFormElements = [
         label: "Sen/vòi",
         types: [
           {
-            name: "Vòi chậu",
-            subtypes: ["Vòi thường", "Vòi cảm ứng"],
+            name: "Vòi Lavabo",
+            subtypes: ["No"],
           },
           {
-            name: "Sen",
-            subtypes: ["Bát sen", "Dây sen"],
+            name: "Sen cây",
+            subtypes: ["No"],
           },
         ],
       },
       {
-        id: "toilet",
-        label: "Bồn cầu/Tiểu treo",
+        id: "urinal",
+        label: "Tiểu treo",
         types: [
           {
-            name: "Bồn cầu",
-            subtypes: ["Bồn cầu liền khối", "Bồn cầu thông minh"],
+            name: "Xả tự động",
+            subtypes: ["No"],
           },
           {
-            name: "Tiểu treo",
-            subtypes: ["Xả tự động", "Xả cơ"],
+            name: "Xả cơ",
+            subtypes: ["No"],
           },
         ],
       },
@@ -209,19 +223,24 @@ export const shoppingViewHeaderMenuItems = [
     path: "/shop/listing?category=stonetable",
   },
   {
+    id: "toilet",
+    label: "Bồn cầu",
+    path: "/shop/listing?category=toilet",
+  },
+  {
     id: "lavabo",
     label: "Lavabo",
     path: "/shop/listing?category=lavabo",
   },
   {
     id: "faucet",
-    label: "Sen/vòi",
+    label: "Sen - Vòi",
     path: "/shop/listing?category=faucet",
   },
   {
-    id: "toilet",
-    label: "Bồn cầu/Tiểu treo",
-    path: "/shop/listing?category=toilet",
+    id: "urinal",
+    label: "Tiểu treo",
+    path: "/shop/listing?category=urinal",
   },
   {
     id: "accessory",
@@ -255,8 +274,8 @@ export const filterOptions = {
       id: "basincabinet",
       label: "Tủ chậu",
       types: [
-        { name: "PVC", subtypes: ["Vuông", "Chữ nhật"] },
-        { name: "Nhôm", subtypes: ["Vuông", "Chữ nhật"] },
+        { name: "TC PVC", subtypes: ["Vuông", "Chữ nhật"] },
+        { name: "TC Nhôm", subtypes: ["Vuông", "Chữ nhật"] },
       ],
     },
     {
@@ -265,6 +284,14 @@ export const filterOptions = {
       types: [
         { name: "Chậu âm", subtypes: ["1 tầng", "2 tầng"] },
         { name: "Chậu dương", subtypes: ["1 tầng", "2 tầng"] },
+      ],
+    },
+    {
+      id: "toilet",
+      label: "Bồn cầu",
+      types: [
+        { name: "Bồn cầu liền khối", subtypes: ["No"] },
+        { name: "Bồn cầu thông minh", subtypes: ["No"] },
       ],
     },
     {
@@ -279,19 +306,19 @@ export const filterOptions = {
       id: "faucet",
       label: "Sen/vòi",
       types: [
-        { name: "Vòi", subtypes: ["Vòi thường", "Vòi cảm ứng"] },
-        { name: "Sen", subtypes: ["Bát sen", "Dây sen"] },
+        { name: "Vòi Lavabo", subtypes: ["No"] },
+        { name: "Sen cây", subtypes: ["No"] },
       ],
     },
     {
-      id: "toilet",
-      label: "Bồn cầu/Tiểu treo",
+      id: "urinal",
+      label: "Tiểu treo",
       types: [
         {
-          name: "Bồn cầu",
-          subtypes: ["Bồn cầu liền khối", "Bồn cầu thông minh"],
+          name: "Xả tự động",
+          subtypes: ["No"],
         },
-        { name: "Tiểu treo", subtypes: ["Xả tự động", "Xả cơ"] },
+        { name: "Xả cơ", subtypes: ["No"] },
       ],
     },
     {

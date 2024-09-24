@@ -43,7 +43,7 @@ function FloatingIcon() {
         </motion.div>
       </motion.a>
       <motion.a
-        href={`https://zalo.me/0914556996`}
+        href={`https://zalo.me/0345366789`}
         target="_blank"
         className={`flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-full bg-blue-500 text-white shadow-lg`}
         
@@ -81,7 +81,7 @@ function FloatingIcon() {
         </motion.div>
       </motion.a>
       <motion.a
-        href={`tel:0914556996`}
+        href={`tel:0345366789`}
 
         className={`flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-full bg-red-500 text-white shadow-lg`}
        
