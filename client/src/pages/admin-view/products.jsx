@@ -30,7 +30,7 @@ const initialFormData = {
   category: "",
   type: "",
   subtype: "",
-  brand: "",
+  // brand: "",
   price: "",
   salePrice: "",
   totalStock: "",
@@ -60,12 +60,20 @@ function AdminProducts() {
 
   function onSubmit(event) {
     event.preventDefault();
+    const updatedFormData = {
+      ...formData,
+      image1: uploadedImageUrl1 || null,
+      image2: uploadedImageUrl2 || null,
+      image3: uploadedImageUrl3 || null,
+      image4: uploadedImageUrl4 || null,
+      image5: uploadedImageUrl5 || null,
+    };
 
     currentEditedId !== null
       ? dispatch(
           editProduct({
             id: currentEditedId,
-            formData,
+            formData: updatedFormData,
           })
         ).then((data) => {
           if (data?.payload?.success) {
@@ -75,16 +83,7 @@ function AdminProducts() {
             setCurrentEditedId(null);
           }
         })
-      : dispatch(
-          addNewProduct({
-            ...formData,
-            image1: uploadedImageUrl1,
-            image2: uploadedImageUrl2,
-            image3: uploadedImageUrl3,
-            image4: uploadedImageUrl4,
-            image5: uploadedImageUrl5,
-          })
-        ).then((data) => {
+      : dispatch(addNewProduct(updatedFormData)).then((data) => {
           if (data?.payload?.success) {
             dispatch(fetchAllProducts());
             setOpenCreateProductsDialog(false);
@@ -110,17 +109,27 @@ function AdminProducts() {
   }
 
   function isFormValid() {
-    return Object.keys(formData)
-      .filter((currentKey) => currentKey !== "averageReview")
-      .map((key) => formData[key] !== "")
-      .every((item) => item);
+    const keysToCheck = Object.keys(formData).filter(
+      (currentKey) =>
+        currentKey !== "averageReview" && !currentKey.startsWith("image")
+    );
+
+    const validationResults = keysToCheck.map((key) => {
+      const isValid =
+        formData[key] !== null &&
+        formData[key] !== undefined &&
+        formData[key] !== "";
+
+      return isValid;
+    });
+
+    return validationResults.every((item) => item);
   }
 
   useEffect(() => {
     dispatch(fetchAllProducts());
   }, [dispatch]);
 
- 
   return (
     <Fragment>
       <div className="mb-5 w-full flex justify-end">
