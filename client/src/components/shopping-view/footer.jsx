@@ -27,7 +27,7 @@ const Footer = () => {
             <p className="mb-2 flex items-center">
               <Phone className="inline-block mr-2" />
               <span>
-                <strong>Số điện thoại:</strong> 0345366789
+                <strong>Số điện thoại:</strong> 0345.366.789
               </span>
             </p>
             <p className="mb-2 flex items-center">

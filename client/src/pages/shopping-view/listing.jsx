@@ -82,6 +82,7 @@ function ShoppingListing() {
     const category = searchParams.get("category");
     const type = searchParams.get("type");
     const subtype = searchParams.get("subtype");
+    
     dispatch(
       fetchAllFilteredProducts({
         filterParams: { category, type, subtype },

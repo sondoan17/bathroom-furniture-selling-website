@@ -140,6 +140,7 @@ function ProductFilter() {
                                     handleTypeChange(
                                       option.id,
                                       type.name,
+                                      
                                       checked
                                     )
                                   }

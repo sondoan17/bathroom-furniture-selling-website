@@ -95,7 +95,7 @@ export const addProductFormElements = [
             subtypes: ["No"],
           },
           {
-            name: "Vuông +Chữ nhật",
+            name: "Vuông + Chữ nhật",
             subtypes: ["No"],
           },
         ],
@@ -271,8 +271,8 @@ export const filterOptions = {
       id: "lavabo",
       label: "Lavabo",
       types: [
-        { name: "Tròn/Elip", subtypes: ["No"] },
-        { name: "Vuông/Chữ nhật", subtypes: ["No"] },
+        { name: "Tròn + Elip", subtypes: ["No"] },
+        { name: "Vuông + Chữ nhật", subtypes: ["No"] },
       ],
     },
     {
