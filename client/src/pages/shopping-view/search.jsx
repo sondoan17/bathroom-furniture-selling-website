@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import searchImg from "../../assets/account-banner.png";
+import { motion, AnimatePresence } from "framer-motion";
 
 function SearchProducts() {
 
@@ -87,15 +88,29 @@ function SearchProducts() {
   
 
   return (
-    <div className="container mx-auto md:px-6 px-4 py-8">
-      <div className="relative h-[300px] w-full overflow-hidden">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="container mx-auto md:px-6 px-4 py-8"
+    >
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="relative h-[300px] w-full overflow-hidden"
+      >
         <img
           src={searchImg}
           className="h-full w-full object-cover object-center"
         />
-
-      </div>
-      <div className="flex justify-center mb-8 mt-[50px] ">
+      </motion.div>
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="flex justify-center mb-8 mt-[50px]"
+      >
         <div className="w-full flex items-center">
           <Input
 
@@ -106,26 +121,48 @@ function SearchProducts() {
             placeholder="Tìm kiếm sản phẩm..."
           />
         </div>
-      </div>
-      {!searchResults.length ? (
-        <h1 className="text-4xl font-extrabold">Không tìm thấy kết quả!</h1>
-      ) : null}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-        {searchResults.map((item) => (
-          <ShoppingProductTile
-            key={item.id}
-            handleAddtoCart={handleAddtoCart}
-            product={item}
-            handleGetProductDetails={handleGetProductDetails}
-          />
-        ))}
-      </div>
+      </motion.div>
+      <AnimatePresence>
+        {!searchResults.length ? (
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="text-4xl font-extrabold"
+          >
+            Không tìm thấy kết quả!
+          </motion.h1>
+        ) : null}
+      </AnimatePresence>
+      <motion.div 
+        layout
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"
+      >
+        <AnimatePresence>
+          {searchResults.map((item) => (
+            <motion.div
+              key={item.id}
+              layout
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ShoppingProductTile
+                handleAddtoCart={handleAddtoCart}
+                product={item}
+                handleGetProductDetails={handleGetProductDetails}
+              />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </motion.div>
       <ProductDetailsDialog
         open={openDetailsDialog}
         setOpen={setOpenDetailsDialog}
         productDetails={productDetails}
       />
-    </div>
+    </motion.div>
   );
 }
 
