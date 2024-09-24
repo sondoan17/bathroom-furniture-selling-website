@@ -274,8 +274,8 @@ export const filterOptions = {
       id: "basincabinet",
       label: "Tủ chậu",
       types: [
-        { name: "TC PVC", subtypes: ["Vuông", "Chữ nhật"] },
-        { name: "TC Nhôm", subtypes: ["Vuông", "Chữ nhật"] },
+        { name: "TC PVC", subtypes: ["No"] },
+        { name: "TC Nhôm", subtypes: ["No"] },
       ],
     },
     {
