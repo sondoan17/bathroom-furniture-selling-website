@@ -111,9 +111,7 @@ function ProductImageUpload({
       key={index}
       onDragOver={handleDragOver}
       onDrop={(e) => handleDrop(e, setImageFile)}
-      className={`${
-        isEditMode ? "opacity-60" : ""
-      } border-2 border-dashed rounded-lg p-4 mb-4`}
+      className="border-2 border-dashed rounded-lg p-4 mb-4"
     >
       <Input
         id={`image-upload-${index}`}
@@ -121,30 +119,27 @@ function ProductImageUpload({
         className="hidden"
         ref={inputRef}
         onChange={(e) => handleImageFileChange(e, setImageFile)}
-        disabled={isEditMode}
+        // disabled={isEditMode}
       />
       {!imageFile ? (
         <Label
           htmlFor={`image-upload-${index}`}
-          className={`${
-            isEditMode ? "cursor-not-allowed" : "cursor-pointer"
-          } flex flex-col items-center justify-center h-32 `}
+          className="flex flex-col items-center justify-center h-32 cursor-pointer"
         >
           <UploadCloudIcon className="w-10 h-10 text-muted-foreground mb-2" />
           <span>Kéo và thả hoặc click để tải lên hình ảnh</span>
         </Label>
       ) : imageLoadingState ? (
-        <Skeleton className="h-10 bg-gray-100" />
+        <Skeleton className="h-20 bg-gray-100" />
       ) : (
         <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <FileIcon className="w-8 text-primary mr-2 h-8" />
-          </div>
+          <img src={uploadedImageUrl} alt="img" className="w-20 h-20" />
           <p className="text-sm font-medium">
             {imageFile.name.length > 20
               ? imageFile.name.substring(0, 20) + "..."
               : imageFile.name}
           </p>
+
           <Button
             variant="ghost"
             size="icon"
@@ -164,6 +159,7 @@ function ProductImageUpload({
       <Label className="text-lg font-semibold mb-2 block">
         Tải lên hình ảnh
       </Label>
+
       {renderImageUploadField(
         imageFile1,
         setImageFile1,

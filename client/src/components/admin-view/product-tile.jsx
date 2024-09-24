@@ -1,6 +1,6 @@
 import { Button } from "../ui/button";
 import { Card, CardContent, CardFooter } from "../ui/card";
-import { formatPrice } from "@/lib/utils";
+import { Edit, Trash2 } from "lucide-react"; // Import icons
 
 function AdminProductTile({
   product,
@@ -10,50 +10,44 @@ function AdminProductTile({
   handleDelete,
 }) {
   return (
-    <Card className="w-full max-w-sm mx-auto">
+    <Card className="w-full min-h-[400px] max-w-sm mx-auto hover:shadow-lg transition-shadow flex flex-col justify-between">
       <div>
         <div className="relative">
           <img
             src={product?.image1}
             alt={product?.title}
-            className="w-full h-[300px] object-cover rounded-t-lg"
+            className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover rounded-t-lg"
           />
         </div>
-        <CardContent>
-          <h2 className="text-xl font-bold mb-2 mt-2">{product?.title}</h2>
-          <div className="flex justify-between items-center mb-2">
-            <span
-              className={`${
-                product?.salePrice > 0 ? "line-through" : ""
-              } text-lg font-semibold text-primary`}
-            >
-              {formatPrice(product?.price)}
-            </span>
-            {product?.salePrice > 0 ? (
-              <span className="text-lg font-bold">
-                {formatPrice(product?.salePrice)}
-              </span>
-            ) : null}
-          </div>
+        <CardContent className="p-2 sm:p-4">
+          <h2 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 break-words">
+            {product?.title}
+          </h2>
         </CardContent>
-        <CardFooter className="flex justify-between items-center">
-          <Button
-            onClick={() => {
-              setOpenCreateProductsDialog(true);
-              setCurrentEditedId(product?._id);
-              setFormData(product);
-            }}
-          >
-            Sửa
-          </Button>
-          <Button
-            variant="destructive"
-            onClick={() => handleDelete(product?._id)}
-          >
-            Xóa
-          </Button>
-        </CardFooter>
       </div>
+      <CardFooter className="p-2 sm:p-4 flex justify-between">
+        <Button
+          size="sm"
+          className="px-3"
+          onClick={() => {
+            setOpenCreateProductsDialog(true);
+            setCurrentEditedId(product?._id);
+            setFormData(product);
+          }}
+        >
+          <Edit className="h-4 w-4 mr-2" />
+          Sửa
+        </Button>
+        <Button
+          variant="destructive"
+          size="sm"
+          className="px-3"
+          onClick={() => handleDelete(product?._id)}
+        >
+          <Trash2 className="h-4 w-4 mr-2" />
+          Xóa
+        </Button>
+      </CardFooter>
     </Card>
   );
 }

@@ -78,21 +78,20 @@ function AdminProducts() {
         ).then((data) => {
           if (data?.payload?.success) {
             dispatch(fetchAllProducts());
-            setFormData(initialFormData);
+
             setOpenCreateProductsDialog(false);
             setCurrentEditedId(null);
+            resetFormData();
+            toast({
+              title: "Sửa sản phẩm thành công",
+            });
           }
         })
       : dispatch(addNewProduct(updatedFormData)).then((data) => {
           if (data?.payload?.success) {
             dispatch(fetchAllProducts());
             setOpenCreateProductsDialog(false);
-            setImageFile1(null);
-            setImageFile2(null);
-            setImageFile3(null);
-            setImageFile4(null);
-            setImageFile5(null);
-            setFormData(initialFormData);
+            resetFormData();
             toast({
               title: "Thêm sản phẩm thành công",
             });
@@ -104,6 +103,9 @@ function AdminProducts() {
     dispatch(deleteProduct(getCurrentProductId)).then((data) => {
       if (data?.payload?.success) {
         dispatch(fetchAllProducts());
+        toast({
+          title: "Xóa sản phẩm thành công",
+        });
       }
     });
   }
@@ -125,6 +127,14 @@ function AdminProducts() {
 
     return validationResults.every((item) => item);
   }
+  function resetFormData() {
+    setImageFile1(null);
+    setImageFile2(null);
+    setImageFile3(null);
+    setImageFile4(null);
+    setImageFile5(null);
+    setFormData(initialFormData);
+  }
 
   useEffect(() => {
     dispatch(fetchAllProducts());
@@ -133,7 +143,12 @@ function AdminProducts() {
   return (
     <Fragment>
       <div className="mb-5 w-full flex justify-end">
-        <Button onClick={() => setOpenCreateProductsDialog(true)}>
+        <Button
+          onClick={() => {
+            setOpenCreateProductsDialog(true);
+            resetFormData();
+          }}
+        >
           Thêm sản phẩm
         </Button>
       </div>
@@ -157,6 +172,7 @@ function AdminProducts() {
           setOpenCreateProductsDialog(false);
           setCurrentEditedId(null);
           setFormData(initialFormData);
+          resetFormData();
         }}
       >
         <SheetContent side="right" className="overflow-auto">
