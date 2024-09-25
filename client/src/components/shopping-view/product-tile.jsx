@@ -27,7 +27,7 @@ function ShoppingProductTile({
   };
 
   return (
-    <Card className="w-full min-h-[400px] max-w-sm mx-auto hover:shadow-lg transition-shadow flex flex-col justify-between cursor-pointer">
+    <Card className="w-full min-h-[550px] max-w-sm mx-auto hover:shadow-lg transition-shadow flex flex-col justify-between cursor-pointer">
       <div
         onClick={() => handleGetProductDetails(product?._id)}
         className="flex-grow"

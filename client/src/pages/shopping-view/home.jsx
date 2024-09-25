@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -21,6 +21,9 @@ import {
   shower,
 } from "@/assets/index";
 import { motion, AnimatePresence } from "framer-motion";
+import { Badge } from "@/components/ui/badge";
+import { ShoppingCart } from "lucide-react";
+import { formatPrice } from "@/lib/utils";
 
 const categoriesWithIcon = [
   {
@@ -270,11 +273,62 @@ function ShoppingHome() {
                       visible: { opacity: 1, y: 0 }
                     }}
                   >
-                    <ShoppingProductTile
-                      handleGetProductDetails={handleGetProductDetails}
-                      product={productItem}
-                      handleAddtoCart={handleAddtoCart}
-                    />
+                    <Card className="w-full min-h-[550px] max-w-sm mx-auto hover:shadow-lg transition-shadow flex flex-col justify-between cursor-pointer">
+                      <div
+                        onClick={() => handleGetProductDetails(productItem?._id)}
+                        className="flex-grow"
+                      >
+                        <div className="relative">
+                          <img
+                            src={productItem?.image1}
+                            alt={productItem?.title}
+                            className="w-full h-[300px] object-cover rounded-t-lg"
+                          />
+                          {productItem?.totalStock === 0 ? (
+                            <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600 text-xs sm:text-sm">
+                              Hết hàng
+                            </Badge>
+                          ) : productItem?.salePrice > 0 ? (
+                            <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600 text-xs sm:text-sm">
+                              Sale
+                            </Badge>
+                          ) : null}
+                        </div>
+                        <CardContent className="p-2 sm:p-4">
+                          <h2 className="text-base sm:text-lg font-bold mb-1 sm:mb-2 break-words">
+                            {productItem?.title}
+                          </h2>
+                        </CardContent>
+                      </div>
+                      <CardFooter className=" pt-0 sm:p-4 flex justify-between items-center">
+                        <div className="flex flex-col">
+                          <span
+                            className={`${
+                              productItem?.salePrice > 0 ? "line-through" : ""
+                            } text-base sm:text-lg font-semibold text-primary`}
+                          >
+                            {productItem?.price == 0 ? "Liên hệ" : formatPrice(productItem?.price)}
+                          </span>
+                          {productItem?.salePrice > 0 ? (
+                            <span className="text-base sm:text-lg font-semibold text-red-500">
+                              {formatPrice(productItem?.salePrice)}
+                            </span>
+                          ) : null}
+                        </div>
+                        {productItem?.totalStock === 0 ? (
+                          <Button className="opacity-60 cursor-not-allowed text-sm sm:text-base">
+                            Hết hàng
+                          </Button>
+                        ) : (
+                          <Button
+                            onClick={() => handleAddtoCart(productItem?._id)}
+                            className="text-sm sm:text-base"
+                          >
+                            <ShoppingCart />
+                          </Button>
+                        )}
+                      </CardFooter>
+                    </Card>
                   </motion.div>
                 ))
               : null}
