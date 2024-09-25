@@ -78,7 +78,6 @@ function AdminProducts() {
         ).then((data) => {
           if (data?.payload?.success) {
             dispatch(fetchAllProducts());
-
             setOpenCreateProductsDialog(false);
             setCurrentEditedId(null);
             resetFormData();
@@ -128,12 +127,17 @@ function AdminProducts() {
     return validationResults.every((item) => item);
   }
   function resetFormData() {
+    setFormData(initialFormData);
     setImageFile1(null);
     setImageFile2(null);
     setImageFile3(null);
     setImageFile4(null);
     setImageFile5(null);
-    setFormData(initialFormData);
+    setUploadedImageUrl1("");
+    setUploadedImageUrl2("");
+    setUploadedImageUrl3("");
+    setUploadedImageUrl4("");
+    setUploadedImageUrl5("");
   }
 
   useEffect(() => {
