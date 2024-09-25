@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 
 const ProductSchema = new mongoose.Schema(
   {
-    image1: String,
-    image2: String,
-    image3: String,
-    image4: String,
-    image5: String,
+    image1: { type: String, default: "" },
+    image2: { type: String, default: "" },
+    image3: { type: String, default: "" },
+    image4: { type: String, default: "" },
+    image5: { type: String, default: "" },
     title: String,
     description: String,
     category: String,

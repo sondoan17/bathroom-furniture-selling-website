@@ -96,60 +96,36 @@ const fetchAllProducts = async (req, res) => {
 //edit a product
 const editProduct = async (req, res) => {
   try {
-    const { id } = req.params;
-    const {
-      image1,
-      image2,
-      image3,
-      image4,
-      image5,
-      title,
-      description,
-      type,
-      category,
-      subtype,
-      // brand,
-      price,
-      salePrice,
-      totalStock,
-      averageReview,
-    } = req.body;
+    const productId = req.params.id;
+    const updateData = req.body;
 
-    let findProduct = await Product.findById(id);
-    if (!findProduct)
-      return res.status(404).json({
-        success: false,
-        message: "Product not found",
-      });
+    // Xử lý các trường hình ảnh
+    for (let i = 1; i <= 5; i++) {
+      const imageField = `image${i}`;
+      if (updateData[imageField] === null) {
+        // Nếu giá trị là null, xóa trường này khỏi document
+        updateData[imageField] = "";
+      }
+    }
 
-    findProduct.title = title || findProduct.title;
-    findProduct.description = description || findProduct.description;
-    findProduct.category = category || findProduct.category;
-    findProduct.type = type || findProduct.type;
-    findProduct.subtype = subtype || findProduct.subtype;
-    // findProduct.brand = brand || findProduct.brand;
-    findProduct.price = price === "" ? 0 : price || findProduct.price;
-    findProduct.salePrice =
-      salePrice === "" ? 0 : salePrice || findProduct.salePrice;
-    findProduct.totalStock = totalStock || findProduct.totalStock;
-    findProduct.image1 = image1 || findProduct.image1;
-    findProduct.image2 = image2 || findProduct.image2;
-    findProduct.image3 = image3 || findProduct.image3;
-    findProduct.image4 = image4 || findProduct.image4;
-    findProduct.image5 = image5 || findProduct.image5;
-    findProduct.averageReview = averageReview || findProduct.averageReview;
+    const updatedProduct = await Product.findByIdAndUpdate(
+      productId,
+      updateData,
+      { new: true, runValidators: true }
+    );
 
-    await findProduct.save();
+    if (!updatedProduct) {
+      return res.status(404).json({ success: false, message: "Không tìm thấy sản phẩm" });
+    }
+
     res.status(200).json({
       success: true,
-      data: findProduct,
+      message: "Cập nhật sản phẩm thành công",
+      data: updatedProduct,
     });
-  } catch (e) {
-    console.log(e);
-    res.status(500).json({
-      success: false,
-      message: "Error occured",
-    });
+  } catch (error) {
+    console.error("Lỗi khi cập nhật sản phẩm:", error);
+    res.status(500).json({ success: false, message: "Lỗi server khi cập nhật sản phẩm" });
   }
 };
 

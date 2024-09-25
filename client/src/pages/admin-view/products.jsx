@@ -41,32 +41,60 @@ function AdminProducts() {
   const [openCreateProductsDialog, setOpenCreateProductsDialog] =
     useState(false);
   const [formData, setFormData] = useState(initialFormData);
-  const [imageFile1, setImageFile1] = useState(null);
-  const [imageFile2, setImageFile2] = useState(null);
-  const [imageFile3, setImageFile3] = useState(null);
-  const [imageFile4, setImageFile4] = useState(null);
-  const [imageFile5, setImageFile5] = useState(null);
-  const [uploadedImageUrl1, setUploadedImageUrl1] = useState("");
-  const [uploadedImageUrl2, setUploadedImageUrl2] = useState("");
-  const [uploadedImageUrl3, setUploadedImageUrl3] = useState("");
-  const [uploadedImageUrl4, setUploadedImageUrl4] = useState("");
-  const [uploadedImageUrl5, setUploadedImageUrl5] = useState("");
+  const [imageFiles, setImageFiles] = useState([null, null, null, null, null]);
+  const [uploadedImageUrls, setUploadedImageUrls] = useState([
+    "",
+    "",
+    "",
+    "",
+    "",
+  ]);
   const [imageLoadingState, setImageLoadingState] = useState(false);
   const [currentEditedId, setCurrentEditedId] = useState(null);
+  const [productImages, setProductImages] = useState([
+    null,
+    null,
+    null,
+    null,
+    null,
+  ]);
+  const [tempImageChanges, setTempImageChanges] = useState({});
 
   const { productList } = useSelector((state) => state.adminProducts);
   const dispatch = useDispatch();
   const { toast } = useToast();
 
+  const handleTempImageChange = (index, newImageUrl) => {
+    setTempImageChanges(prev => ({
+      ...prev,
+      [index]: newImageUrl
+    }));
+  };
+
   function onSubmit(event) {
     event.preventDefault();
     const updatedFormData = {
       ...formData,
-      image1: uploadedImageUrl1 || null,
-      image2: uploadedImageUrl2 || null,
-      image3: uploadedImageUrl3 || null,
-      image4: uploadedImageUrl4 || null,
-      image5: uploadedImageUrl5 || null,
+      image1:
+        tempImageChanges[0] !== undefined
+          ? tempImageChanges[0]
+          : formData.image1,
+      image2:
+        tempImageChanges[1] !== undefined
+          ? tempImageChanges[1]
+          : formData.image2,
+      image3:
+        tempImageChanges[2] !== undefined
+          ? tempImageChanges[2]
+          : formData.image3,
+      image4:
+        tempImageChanges[3] !== undefined
+          ? tempImageChanges[3]
+          : formData.image4,
+      image5:
+        tempImageChanges[4] !== undefined
+          ? tempImageChanges[4]
+          : formData.image5,
     };
 
     currentEditedId !== null
@@ -81,6 +109,7 @@ function AdminProducts() {
             setOpenCreateProductsDialog(false);
             setCurrentEditedId(null);
             resetFormData();
+            setTempImageChanges({}); // Reset temp changes
             toast({
               title: "Sửa sản phẩm thành công",
             });
@@ -91,6 +120,7 @@ function AdminProducts() {
             dispatch(fetchAllProducts());
             setOpenCreateProductsDialog(false);
             resetFormData();
+            setTempImageChanges({}); // Reset temp changes
             toast({
               title: "Thêm sản phẩm thành công",
             });
@@ -128,16 +158,10 @@ function AdminProducts() {
   }
   function resetFormData() {
     setFormData(initialFormData);
-    setImageFile1(null);
-    setImageFile2(null);
-    setImageFile3(null);
-    setImageFile4(null);
-    setImageFile5(null);
-    setUploadedImageUrl1("");
-    setUploadedImageUrl2("");
-    setUploadedImageUrl3("");
-    setUploadedImageUrl4("");
-    setUploadedImageUrl5("");
+    setImageFiles([null, null, null, null, null]);
+    setUploadedImageUrls(["", "", "", "", ""]);
+    setProductImages([null, null, null, null, null]);
+    setTempImageChanges({}); // Reset temp changes
   }
 
   useEffect(() => {
@@ -186,30 +210,23 @@ function AdminProducts() {
             </SheetTitle>
           </SheetHeader>
           <ProductImageUpload
-            imageFile1={imageFile1}
-            imageFile2={imageFile2}
-            imageFile3={imageFile3}
-            imageFile4={imageFile4}
-            imageFile5={imageFile5}
+            imageFiles={imageFiles}
+            setImageFiles={setImageFiles}
+            uploadedImageUrls={uploadedImageUrls}
+            setUploadedImageUrls={setUploadedImageUrls}
             imageLoadingState={imageLoadingState}
-            isEditMode={currentEditedId !== null}
-            setImageFile1={setImageFile1}
-            setImageFile2={setImageFile2}
-            setImageFile3={setImageFile3}
-            setImageFile4={setImageFile4}
-            setImageFile5={setImageFile5}
             setImageLoadingState={setImageLoadingState}
-            setUploadedImageUrl1={setUploadedImageUrl1}
-            setUploadedImageUrl2={setUploadedImageUrl2}
-            setUploadedImageUrl3={setUploadedImageUrl3}
-            setUploadedImageUrl4={setUploadedImageUrl4}
-            setUploadedImageUrl5={setUploadedImageUrl5}
-            uploadedImageUrl1={uploadedImageUrl1}
-            uploadedImageUrl2={uploadedImageUrl2}
-            uploadedImageUrl3={uploadedImageUrl3}
-            uploadedImageUrl4={uploadedImageUrl4}
-            uploadedImageUrl5={uploadedImageUrl5}
+            isEditMode={currentEditedId !== null}
+            productImages={[
+              formData.image1,
+              formData.image2,
+              formData.image3,
+              formData.image4,
+              formData.image5,
+            ].filter(Boolean)}
+            setProductImages={setProductImages}
             isDashboard={false}
+            onTempImageChange={handleTempImageChange}
           />
           <div className="py-6">
             <CommonForm
