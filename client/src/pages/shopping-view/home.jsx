@@ -19,6 +19,7 @@ import {
   lavabo,
   stonetable,
   shower,
+  accesories,
 } from "@/assets/index";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
@@ -39,6 +40,17 @@ const categoriesWithIcon = [
     image: shower,
   },
   { id: "toilet", label: "Bồn cầu", image: toilet },
+  { id: "accesories", label: "Phụ kiện", image: accesories },
+];
+
+const featuredCategories = [
+  "basincabinet",
+  "stonetable",
+  "toilet",
+  "lavabo",
+  "faucet",
+  "urinal",
+  "accesories",
 ];
 
 function ShoppingHome() {
@@ -112,12 +124,12 @@ function ShoppingHome() {
 
   useEffect(() => {
     if (productList.length > 0) {
-      const randomProducts = getRandomProductsByCategory(
+      const featuredProducts = getRandomProductsByCategory(
         productList,
-        categoriesWithIcon,
+        featuredCategories,
         3
       );
-      setRandomProducts(randomProducts);
+      setRandomProducts(featuredProducts);
     }
   }, [productList]);
 
@@ -125,7 +137,7 @@ function ShoppingHome() {
     const result = [];
     categories.forEach((category) => {
       const filteredProducts = productList.filter(
-        (product) => product.category === category.id
+        (product) => product.category === category
       );
       const randomProducts = filteredProducts
         .sort(() => 0.5 - Math.random())
@@ -136,13 +148,13 @@ function ShoppingHome() {
   }
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="flex flex-col min-h-screen"
     >
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -191,7 +203,7 @@ function ShoppingHome() {
         </Button>
       </motion.div>
 
-      <motion.section 
+      <motion.section
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
@@ -201,7 +213,7 @@ function ShoppingHome() {
           <h2 className="text-3xl font-bold text-center mb-8">
             Danh mục sản phẩm
           </h2>
-          <motion.div 
+          <motion.div
             initial="hidden"
             animate="visible"
             variants={{
@@ -213,7 +225,7 @@ function ShoppingHome() {
                 }
               }
             }}
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4"
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6"
           >
             {categoriesWithIcon.map((categoryItem) => (
               <motion.div
@@ -222,16 +234,23 @@ function ShoppingHome() {
                   hidden: { opacity: 0, y: 20 },
                   visible: { opacity: 1, y: 0 }
                 }}
+                className="aspect-square"
               >
                 <Card
                   onClick={() =>
                     handleNavigateToListingPage(categoryItem, "category")
                   }
-                  className="cursor-pointer hover:shadow-lg transition-shadow"
+                  className="cursor-pointer hover:shadow-lg transition-shadow h-full flex flex-col justify-between"
                 >
-                  <CardContent className="flex flex-col items-center justify-center p-6">
-                    <img src={categoryItem.image} alt="" className="rounded-sm" />
-                    <span className="font-bold">{categoryItem.label}</span>
+                  <CardContent className="flex flex-col items-center justify-center p-2 sm:p-4 flex-grow">
+                    <div className="w-full h-0 pb-[75%] relative mb-2 sm:mb-4">
+                      <img 
+                        src={categoryItem.image} 
+                        alt={categoryItem.label} 
+                        className="absolute inset-0 w-full h-full object-contain"
+                      />
+                    </div>
+                    <span className="font-bold text-center text-sm sm:text-base">{categoryItem.label}</span>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -240,7 +259,7 @@ function ShoppingHome() {
         </div>
       </motion.section>
 
-      <motion.section 
+      <motion.section
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
@@ -250,7 +269,7 @@ function ShoppingHome() {
           <h2 className="text-3xl font-bold text-center mb-8">
             Sản phẩm nổi bật
           </h2>
-          <motion.div 
+          <motion.div
             initial="hidden"
             animate="visible"
             variants={{
@@ -258,9 +277,9 @@ function ShoppingHome() {
               visible: {
                 opacity: 1,
                 transition: {
-                  staggerChildren: 0.1
-                }
-              }
+                  staggerChildren: 0.1,
+                },
+              },
             }}
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
           >
@@ -270,12 +289,14 @@ function ShoppingHome() {
                     key={productItem.id || index}
                     variants={{
                       hidden: { opacity: 0, y: 20 },
-                      visible: { opacity: 1, y: 0 }
+                      visible: { opacity: 1, y: 0 },
                     }}
                   >
                     <Card className="w-full min-h-[550px] max-w-sm mx-auto hover:shadow-lg transition-shadow flex flex-col justify-between cursor-pointer">
                       <div
-                        onClick={() => handleGetProductDetails(productItem?._id)}
+                        onClick={() =>
+                          handleGetProductDetails(productItem?._id)
+                        }
                         className="flex-grow"
                       >
                         <div className="relative">
@@ -307,7 +328,9 @@ function ShoppingHome() {
                               productItem?.salePrice > 0 ? "line-through" : ""
                             } text-base sm:text-lg font-semibold text-primary`}
                           >
-                            {productItem?.price == 0 ? "Liên hệ" : formatPrice(productItem?.price)}
+                            {productItem?.price == 0
+                              ? "Liên hệ"
+                              : formatPrice(productItem?.price)}
                           </span>
                           {productItem?.salePrice > 0 ? (
                             <span className="text-base sm:text-lg font-semibold text-red-500">

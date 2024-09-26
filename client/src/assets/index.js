@@ -10,6 +10,7 @@ import phone from "./phone.png";
 import showroom from "./showroom4.png";
 import logo from "./logo-header.png";
 import basincabinet from "./basincabinet.jpg";
+import accesories from "./accesories.webp";
 
 export {
   toilet,
@@ -24,4 +25,5 @@ export {
   showroom,
   logo,
   basincabinet,
+  accesories,
 };
