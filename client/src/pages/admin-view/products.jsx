@@ -15,6 +15,7 @@ import {
   deleteProduct,
   editProduct,
   fetchAllProducts,
+  toggleProductVisibility, 
 } from "@/store/admin/products-slice";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -139,6 +140,17 @@ function AdminProducts() {
     });
   }
 
+  function handleToggleVisibility(productId) {
+    dispatch(toggleProductVisibility(productId)).then((data) => {
+      if (data?.payload?.success) {
+        dispatch(fetchAllProducts());
+        toast({
+          title: data.payload.message,
+        });
+      }
+    });
+  }
+
   function isFormValid() {
     const keysToCheck = Object.keys(formData).filter(
       (currentKey) =>
@@ -189,7 +201,8 @@ function AdminProducts() {
                 setCurrentEditedId={setCurrentEditedId}
                 product={productItem}
                 handleDelete={handleDelete}
-                key={`${productItem.id}-${index}`}
+                handleToggleVisibility={handleToggleVisibility}
+                key={productItem.id || index} 
               />
             ))
           : null}

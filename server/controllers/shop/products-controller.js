@@ -4,7 +4,9 @@ const getFilteredProducts = async (req, res) => {
   try {
     const { category = [], type = [], subtype = [], sortBy = "price-lowtohigh" } = req.query;
 
-    let filters = {};
+    let filters = {
+      isHidden: false  
+    };
 
     if (category.length) {
       filters.category = { $in: category.split(",") };
@@ -51,11 +53,11 @@ const getFilteredProducts = async (req, res) => {
       success: true,
       data: products,
     });
-  } catch (e) {
+  } catch (error) {
     console.log(error);
     res.status(500).json({
       success: false,
-      message: "Some error occured",
+      message: "Some error occurred",
     });
   }
 };
@@ -63,23 +65,23 @@ const getFilteredProducts = async (req, res) => {
 const getProductDetails = async (req, res) => {
   try {
     const { id } = req.params;
-    const product = await Product.findById(id);
+    const product = await Product.findOne({ _id: id, isHidden: false });
 
     if (!product)
       return res.status(404).json({
         success: false,
-        message: "Product not found!",
+        message: "Product not found or is hidden!",
       });
 
     res.status(200).json({
       success: true,
       data: product,
     });
-  } catch (e) {
+  } catch (error) {
     console.log(error);
     res.status(500).json({
       success: false,
-      message: "Some error occured",
+      message: "Some error occurred",
     });
   }
 };

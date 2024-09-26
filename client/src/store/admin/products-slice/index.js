@@ -64,6 +64,16 @@ export const deleteProduct = createAsyncThunk(
   }
 );
 
+export const toggleProductVisibility = createAsyncThunk(
+  "/products/toggleVisibility",
+  async (id) => {
+    const result = await axios.put(
+      `${backendUrl}/api/admin/products/toggle-visibility/${id}`
+    );
+    return result?.data;
+  }
+);
+
 const AdminProductsSlice = createSlice({
   name: "adminProducts",
   initialState,

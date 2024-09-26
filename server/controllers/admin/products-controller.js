@@ -154,10 +154,40 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+const toggleProductVisibility = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const product = await Product.findById(id);
+
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        message: "Không tìm thấy sản phẩm",
+      });
+    }
+
+    product.isHidden = !product.isHidden;
+    await product.save();
+
+    res.status(200).json({
+      success: true,
+      message: product.isHidden ? "Sản phẩm đã được ẩn" : "Sản phẩm đã được hiện",
+      data: product,
+    });
+  } catch (error) {
+    console.error("Lỗi khi thay đổi trạng thái ẩn/hiện sản phẩm:", error);
+    res.status(500).json({
+      success: false,
+      message: "Lỗi server khi thay đổi trạng thái ẩn/hiện sản phẩm",
+    });
+  }
+};
+
 module.exports = {
   handleImageUpload,
   addProduct,
   fetchAllProducts,
   editProduct,
   deleteProduct,
+  toggleProductVisibility,
 };

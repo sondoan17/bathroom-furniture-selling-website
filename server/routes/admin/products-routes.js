@@ -6,6 +6,7 @@ const {
   editProduct,
   fetchAllProducts,
   deleteProduct,
+  toggleProductVisibility,
 } = require("../../controllers/admin/products-controller");
 
 const { upload } = require("../../helpers/cloudinary");
@@ -17,5 +18,6 @@ router.post("/add", cors(), addProduct);
 router.put("/edit/:id", cors(), editProduct);
 router.delete("/delete/:id", cors(), deleteProduct);
 router.get("/get", cors(), fetchAllProducts);
+router.put("/toggle-visibility/:id", cors(), toggleProductVisibility);
 
 module.exports = router;
