@@ -23,36 +23,54 @@ function CommonForm({
   const [subtypeOptions, setSubtypeOptions] = useState([]);
 
   useEffect(() => {
-    const categoryControl = formControls.find(control => control.name === "category");
-    
+    const categoryControl = formControls.find(
+      (control) => control.name === "category"
+    );
+
     if (categoryControl && categoryControl.options) {
-      const selectedCategory = categoryControl.options.find(option => option.id === formData.category);
+      const selectedCategory = categoryControl.options.find(
+        (option) => option.id === formData.category
+      );
       if (selectedCategory && selectedCategory.types) {
-        setTypeOptions(selectedCategory.types.map(type => ({ id: type.name, label: type.name })));
-        setFormData(prevData => ({ ...prevData, type: "", subtype: "" }));
+        setTypeOptions(
+          selectedCategory.types.map((type) => ({
+            id: type.name,
+            label: type.name,
+          }))
+        );
       } else {
         setTypeOptions([]);
         setSubtypeOptions([]);
       }
     }
-  }, [formData.category, formControls, setFormData]);
+  }, [formData.category, formControls]);
 
   useEffect(() => {
-    const categoryControl = formControls.find(control => control.name === "category");
-    
+    const categoryControl = formControls.find(
+      (control) => control.name === "category"
+    );
+
     if (categoryControl && categoryControl.options) {
-      const selectedCategory = categoryControl.options.find(option => option.id === formData.category);
+      const selectedCategory = categoryControl.options.find(
+        (option) => option.id === formData.category
+      );
       if (selectedCategory && selectedCategory.types) {
-        const selectedType = selectedCategory.types.find(type => type.name === formData.type);
+        const selectedType = selectedCategory.types.find(
+          (type) => type.name === formData.type
+        );
         if (selectedType && selectedType.subtypes) {
-          setSubtypeOptions(selectedType.subtypes.map(subtype => ({ id: subtype, label: subtype })));
-          setFormData(prevData => ({ ...prevData, subtype: "" }));
+          setSubtypeOptions(
+            selectedType.subtypes.map((subtype) => ({
+              id: subtype,
+              label: subtype,
+            }))
+          );
         } else {
           setSubtypeOptions([]);
         }
       }
     }
-  }, [formData.category, formData.type, formControls, setFormData]);
+  }, [formData.category, formData.type, formControls]);
 
   function renderInputsByComponentType(getControlItem) {
     let element = null;
@@ -123,6 +141,8 @@ function CommonForm({
                 [getControlItem.name]: event.target.value,
               })
             }
+            rows={8}
+            className="min-h-[200px]"
           />
         );
         break;

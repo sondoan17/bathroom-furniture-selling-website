@@ -64,6 +64,32 @@ function AdminProducts() {
   const dispatch = useDispatch();
   const { toast } = useToast();
 
+  function handleEdit(product) {
+    setOpenCreateProductsDialog(true);
+    setCurrentEditedId(product._id);
+    
+    // Cập nhật formData với dữ liệu sản phẩm hiện tại, bao gồm cả loại và tính năng
+    setFormData({
+      ...product,
+      category: product.category || "",
+      type: product.type || "",
+      subtype: product.subtype || "",
+      // Thêm các trường khác nếu cần
+    });
+
+    // Cập nhật productImages với hình ảnh hiện tại của sản phẩm
+    setProductImages([
+      product.image1 || null,
+      product.image2 || null,
+      product.image3 || null,
+      product.image4 || null,
+      product.image5 || null,
+    ]);
+
+    // Reset tempImageChanges
+    setTempImageChanges({});
+  }
+
   const handleTempImageChange = (index, newImageUrl) => {
     setTempImageChanges(prev => ({
       ...prev,
@@ -201,6 +227,7 @@ function AdminProducts() {
                 product={productItem}
                 handleDelete={handleDelete}
                 handleToggleVisibility={handleToggleVisibility}
+                handleEdit={handleEdit} // Truyền hàm handleEdit mới
                 key={productItem.id || index} 
               />
             ))
@@ -208,11 +235,12 @@ function AdminProducts() {
       </div>
       <Sheet
         open={openCreateProductsDialog}
-        onOpenChange={() => {
-          setOpenCreateProductsDialog(false);
-          setCurrentEditedId(null);
-          setFormData(initialFormData);
-          resetFormData();
+        onOpenChange={(isOpen) => {
+          if (!isOpen) {
+            setOpenCreateProductsDialog(false);
+            setCurrentEditedId(null);
+            resetFormData();
+          }
         }}
       >
         <SheetContent side="right" className="overflow-auto">
