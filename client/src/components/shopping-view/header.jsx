@@ -24,7 +24,8 @@ import { useEffect, useState } from "react";
 import { fetchCartItems } from "@/store/shop/cart-slice";
 import { Label } from "../ui/label";
 import { logo } from "@/assets/index";
-function MenuItems() {
+
+function MenuItems({ onItemClick }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -44,6 +45,7 @@ function MenuItems() {
 
     setSearchParams(new URLSearchParams(`?category=${getCurrentMenuItem.id}`));
     navigate(getCurrentMenuItem.path);
+    onItemClick(); // Call this function to close the sidebar
   }
 
   function isActive(menuItem) {
@@ -164,6 +166,15 @@ function HeaderRightContent(isAuthenticated) {
 
 function ShoppingHeader() {
   const { isAuthenticated } = useSelector((state) => state.auth);
+  const [open, setOpen] = useState(false);
+
+  const handleSheetOpenChange = (isOpen) => {
+    setOpen(isOpen);
+  };
+
+  const handleMenuItemClick = () => {
+    setOpen(false);
+  };
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">
@@ -172,7 +183,7 @@ function ShoppingHeader() {
           <img src={logo} alt="logo" className="w-10 h-10" />
           <span className="font-bold">Shop Bảo Minh</span>
         </Link>
-        <Sheet>
+        <Sheet open={open} onOpenChange={handleSheetOpenChange}>
           <SheetTrigger asChild>
             <Button variant="outline" size="icon" className="lg:hidden">
               <Menu className="h-6 w-6" />
@@ -180,7 +191,7 @@ function ShoppingHeader() {
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="w-full max-w-xs">
-            <MenuItems />
+            <MenuItems onItemClick={handleMenuItemClick} />
             <HeaderRightContent isAuthenticated={isAuthenticated} />
           </SheetContent>
         </Sheet>
