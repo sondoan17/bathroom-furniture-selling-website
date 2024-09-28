@@ -27,7 +27,6 @@ function ShoppingListing() {
   const { productList, productDetails } = useSelector(
     (state) => state.shopProducts
   );
-
   const { cartItems } = useSelector((state) => state.shopCart);
   const { user } = useSelector((state) => state.auth);
   const [sort, setSort] = useState("price-lowtohigh");
@@ -57,7 +56,6 @@ function ShoppingListing() {
             title: `Số lượng tối đa có thể thêm cho sản phẩm này là ${getQuantity}`,
             variant: "destructive",
           });
-
           return;
         }
       }
@@ -140,7 +138,6 @@ function ShoppingListing() {
             {productList && productList.length > 0
               ? productList.map((productItem, index) => (
                   <motion.div
-
                     key={productItem.id || index}
                     layout
                     initial={{ opacity: 0 }}

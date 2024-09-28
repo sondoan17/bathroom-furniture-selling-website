@@ -19,29 +19,22 @@ const getFilteredProducts = async (req, res) => {
     if (subtype.length) {
       filters.subtype = { $in: subtype.split(",") };
     }
-    
 
     let sort = {};
 
     switch (sortBy) {
       case "price-lowtohigh":
         sort.price = 1;
-
         break;
       case "price-hightolow":
         sort.price = -1;
-
         break;
       case "title-atoz":
         sort.title = 1;
-
         break;
-
       case "title-ztoa":
         sort.title = -1;
-
         break;
-
       default:
         sort.price = 1;
         break;

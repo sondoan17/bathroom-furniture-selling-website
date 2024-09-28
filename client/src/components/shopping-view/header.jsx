@@ -1,10 +1,5 @@
-import { HousePlug, LogOut, Menu, ShoppingCart, UserCog } from "lucide-react";
-import {
-  Link,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { LogOut, Menu, ShoppingCart, UserCog } from "lucide-react";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Button } from "../ui/button";
 import { useDispatch, useSelector } from "react-redux";
@@ -45,7 +40,7 @@ function MenuItems({ onItemClick }) {
 
     setSearchParams(new URLSearchParams(`?category=${getCurrentMenuItem.id}`));
     navigate(getCurrentMenuItem.path);
-    onItemClick(); // Call this function to close the sidebar
+    onItemClick();
   }
 
   function isActive(menuItem) {

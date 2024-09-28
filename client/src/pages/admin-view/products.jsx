@@ -31,7 +31,6 @@ const initialFormData = {
   category: "",
   type: "",
   subtype: "",
-  // brand: "",
   price: "",
   salePrice: "",
   totalStock: "",
@@ -110,7 +109,7 @@ function AdminProducts() {
             setOpenCreateProductsDialog(false);
             setCurrentEditedId(null);
             resetFormData();
-            setTempImageChanges({}); // Reset temp changes
+            setTempImageChanges({});
             toast({
               title: "Sửa sản phẩm thành công",
             });
@@ -121,7 +120,7 @@ function AdminProducts() {
             dispatch(fetchAllProducts());
             setOpenCreateProductsDialog(false);
             resetFormData();
-            setTempImageChanges({}); // Reset temp changes
+            setTempImageChanges({});
             toast({
               title: "Thêm sản phẩm thành công",
             });
@@ -173,7 +172,7 @@ function AdminProducts() {
     setImageFiles([null, null, null, null, null]);
     setUploadedImageUrls(["", "", "", "", ""]);
     setProductImages([null, null, null, null, null]);
-    setTempImageChanges({}); // Reset temp changes
+    setTempImageChanges({});
   }
 
   useEffect(() => {
