@@ -10,7 +10,9 @@ import { useToast } from "../ui/use-toast";
 import { setProductDetails } from "@/store/shop/products-slice";
 import { Label } from "../ui/label";
 import StarRatingComponent from "../common/star-rating";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from "embla-carousel-autoplay";
 import { addReview, getReviews } from "@/store/shop/review-slice";
 import {
   Carousel,
@@ -19,8 +21,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
 import { formatPrice } from "@/lib/utils";
+import { ChevronLeft, ChevronRight } from "lucide-react"; // Import icons
 
 function ProductDetailsDialog({ open, setOpen, productDetails }) {
   const [reviewMsg, setReviewMsg] = useState("");
@@ -31,13 +33,43 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
   const { reviews } = useSelector((state) => state.shopReview);
 
   const { toast } = useToast();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000, stopOnInteraction: false })]);
+
   const productImages = [
     productDetails?.image1,
     productDetails?.image2,
     productDetails?.image3,
     productDetails?.image4,
     productDetails?.image5,
-  ];
+  ].filter(Boolean);
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setCurrentSlide(emblaApi.selectedScrollSnap());
+  }, [emblaApi, setCurrentSlide]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on("select", onSelect);
+    return () => emblaApi.off("select", onSelect);
+  }, [emblaApi, onSelect]);
+
+  const handleThumbnailClick = useCallback((index) => {
+    if (emblaApi) {
+      emblaApi.scrollTo(index);
+    }
+  }, [emblaApi]);
+
   function handleRatingChange(getRating) {
     setRating(getRating);
   }
@@ -119,21 +151,57 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
     <Dialog open={open} onOpenChange={handleDialogClose}>
       <DialogContent className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-10 p-4 sm:p-6 md:p-8 lg:p-12 max-w-[95vw] sm:max-w-[90vw] md:max-w-[85vw] lg:max-w-[90vw] lg:min-h-[70vh]">
         <div className="relative rounded-lg md:max-w-[650px] md:mx-auto">
-          <Carousel plugins={[Autoplay({ delay: 5000 })]}>
-            <CarouselContent>
+          <div className="overflow-hidden relative" ref={emblaRef}>
+            <div className="flex">
               {productImages.map((image, index) => (
-                image ? (<CarouselItem key={index}>
+                <div className="flex-[0_0_100%]" key={index}>
                   <img
                     src={image}
-                    alt={productDetails?.title}
+                    alt={`${productDetails?.title} - Ảnh ${index + 1}`}
                     className="aspect-square w-full object-cover rounded-lg"
                   />
-                </CarouselItem>) : null
+                </div>
               ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
+            </div>
+            <Button 
+              className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white/80 hover:bg-white"
+              size="icon"
+              variant="ghost"
+              onClick={scrollPrev}
+            >
+              <ChevronLeft className="h-6 w-6" />
+            </Button>
+            <Button 
+              className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white/80 hover:bg-white"
+              size="icon"
+              variant="ghost"
+              onClick={scrollNext}
+            >
+              <ChevronRight className="h-6 w-6" />
+            </Button>
+          </div>
+          <div className="flex space-x-2 overflow-x-auto pb-2 mt-4">
+            {productImages.map((image, index) => (
+              <div
+                key={index}
+                className="relative cursor-pointer"
+                onClick={() => handleThumbnailClick(index)}
+              >
+                <img
+                  src={image}
+                  alt={`${productDetails?.title} - Ảnh nhỏ ${index + 1}`}
+                  className="w-16 h-16 object-cover rounded"
+                />
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-200 rounded-full overflow-hidden">
+                  <div 
+                    className={`h-full bg-primary transition-all duration-300 ease-in-out ${
+                      currentSlide === index ? 'w-full' : 'w-0'
+                    }`}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
         <div className="flex flex-col justify-between">
           <div>
