@@ -5,7 +5,7 @@ import { addToCart, fetchCartItems } from "@/store/shop/cart-slice";
 import { useToast } from "../ui/use-toast";
 import { setProductDetails } from "@/store/shop/products-slice";
 import { useEffect, useState, useCallback } from "react";
-import useEmblaCarousel from 'embla-carousel-react';
+import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { getReviews } from "@/store/shop/review-slice";
 import { formatPrice } from "@/lib/utils";
@@ -18,7 +18,9 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
 
   const { toast } = useToast();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000, stopOnInteraction: false })]);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
+    Autoplay({ delay: 5000, stopOnInteraction: false }),
+  ]);
 
   const productImages = [
     productDetails?.image1,
@@ -48,11 +50,14 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
     return () => emblaApi.off("select", onSelect);
   }, [emblaApi, onSelect]);
 
-  const handleThumbnailClick = useCallback((index) => {
-    if (emblaApi) {
-      emblaApi.scrollTo(index);
-    }
-  }, [emblaApi]);
+  const handleThumbnailClick = useCallback(
+    (index) => {
+      if (emblaApi) {
+        emblaApi.scrollTo(index);
+      }
+    },
+    [emblaApi]
+  );
 
   function handleAddToCart(getCurrentProductId, getTotalStock) {
     let getCartItems = cartItems.items || [];
@@ -114,7 +119,7 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
                 </div>
               ))}
             </div>
-            <Button 
+            <Button
               className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white/80 hover:bg-white"
               size="icon"
               variant="ghost"
@@ -122,7 +127,7 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
             >
               <ChevronLeft className="h-6 w-6" />
             </Button>
-            <Button 
+            <Button
               className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white/80 hover:bg-white"
               size="icon"
               variant="ghost"
@@ -144,9 +149,9 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
                   className="w-16 h-16 object-cover rounded"
                 />
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-200 rounded-full overflow-hidden">
-                  <div 
+                  <div
                     className={`h-full bg-primary transition-all duration-300 ease-in-out ${
-                      currentSlide === index ? 'w-full' : 'w-0'
+                      currentSlide === index ? "w-full" : "w-0"
                     }`}
                   ></div>
                 </div>
@@ -156,7 +161,9 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
         </div>
         <div className="flex flex-col justify-between">
           <div>
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold mb-2">{productDetails?.title}</h1>
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold mb-2">
+              {productDetails?.title}
+            </h1>
             <p
               className="
                 text-muted-foreground text-sm sm:text-base md:text-lg 
@@ -172,10 +179,13 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
           </div>
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 sm:mb-4">
             <p
-              className={`text-xl sm:text-2xl md:text-3xl font-thin text-primary ${productDetails?.salePrice > 0 ? "line-through" : ""
-                }`}
+              className={`text-xl sm:text-2xl md:text-3xl font-thin text-primary ${
+                productDetails?.salePrice > 0 ? "line-through" : ""
+              }`}
             >
-              {productDetails?.price == 0 ? "Liên hệ" : formatPrice(productDetails?.price)}
+              {productDetails?.price == 0
+                ? "Liên hệ"
+                : formatPrice(productDetails?.price)}
             </p>
             {productDetails?.salePrice > 0 && (
               <p className="text-lg sm:text-xl md:text-2xl font-bold text-red-500 mt-1 sm:mt-0">

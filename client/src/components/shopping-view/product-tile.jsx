@@ -5,6 +5,8 @@ import { formatPrice } from "@/lib/utils";
 import { ShoppingCart } from "lucide-react";
 import { useSelector } from "react-redux";
 import { useToast } from "@/components/ui/use-toast";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 function ShoppingProductTile({
   product,
@@ -33,10 +35,12 @@ function ShoppingProductTile({
         className="flex-grow"
       >
         <div className="relative">
-          <img
+          <LazyLoadImage
             src={product?.image1}
             alt={product?.title}
+            effect="blur"
             className="w-full h-[300px] sm:h-[300px] md:h-[300px] object-cover rounded-t-lg"
+            wrapperClassName="w-full h-[300px] sm:h-[300px] md:h-[300px]"
           />
           {product?.totalStock === 0 ? (
             <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600 text-xs sm:text-sm">

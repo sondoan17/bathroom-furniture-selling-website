@@ -1,6 +1,9 @@
 import { Button } from "../ui/button";
 import { Card, CardContent, CardFooter } from "../ui/card";
-import { Edit, Trash2, EyeOff, Eye } from "lucide-react"; // Import icons
+import { Edit, Trash2, EyeOff, Eye } from "lucide-react";
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 function AdminProductTile({
   product,
@@ -12,20 +15,19 @@ function AdminProductTile({
 }) {
   return (
     <Card className={`w-full min-h-[400px] max-w-sm mx-auto hover:shadow-lg transition-shadow flex flex-col justify-between ${product.isHidden ? 'opacity-50' : ''}`}>
-      <div>
-        <div className="relative">
-          <img
-            src={product?.image1}
-            alt={product?.title}
-            className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover rounded-t-lg"
-          />
-        </div>
-        <CardContent className="p-2 sm:p-4">
-          <h2 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 break-words">
-            {product?.title}
-          </h2>
-        </CardContent>
+      <div className="relative">
+        <LazyLoadImage
+          src={product?.image1}
+          alt={product?.title}
+          effect="blur"
+          className="w-full h-[200px] sm:h-[250px] md:h-[300px] object-cover rounded-t-lg"
+        />
       </div>
+      <CardContent className="p-2 sm:p-4">
+        <h2 className="text-lg sm:text-xl font-bold mb-1 sm:mb-2 break-words">
+          {product?.title}
+        </h2>
+      </CardContent>
       <CardFooter className="p-2 sm:p-4 flex justify-between">
         <Button
           size="sm"
