@@ -37,7 +37,7 @@ function App() {
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
-      <Routes>
+      {/* <Routes>
         <Route
           path="/"
           element={
@@ -89,7 +89,7 @@ function App() {
         </Route>
         <Route path="/unauth-page" element={<UnauthPage />} />
         <Route path="*" element={<NotFound />} />
-      </Routes>
+      </Routes> */}
     </div>
   );
 }
